@@ -36,14 +36,79 @@
            alt="FTR — First Time Right" width="113" height="40">
     </a>
 
-    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav">
+      <span class="nav__toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="u-visually-hidden">Menu</span>
+    </button>
 
     <nav class="nav" id="nav" aria-label="Primary">
-      <a class="nav__link" href="../../about/">About Us</a>
-      <a class="nav__link" href="../../services/">Services</a>
-      <a class="nav__link" href="../../academy/">Academy</a>
-      <a class="nav__link" href="../../markets/">Markets</a>
-      <a class="nav__link nav__link--cta" href="../../contact/">Contact</a>
+      <div class="nav__head">
+        <img class="nav__logo" src="../../assets/img/ftr-logo-32.png"
+             srcset="../../assets/img/ftr-logo-32.png 1x, ../../assets/img/ftr-logo-64.png 2x"
+             alt="" width="90" height="32">
+        <button class="nav__close" type="button">
+          <span class="nav__close-x" aria-hidden="true"></span>
+          <span class="u-visually-hidden">Close menu</span>
+        </button>
+      </div>
+
+      <span class="nav__label">Navigation</span>
+
+      <ol class="nav__list">
+        <li class="nav__item" style="--i:0">
+          <a class="nav__link" href="../../about/">
+            <span class="nav__num">01</span>
+            <span class="nav__name">About Us</span>
+            <img class="nav__arrow" src="../../assets/img/ftr-arrow-16.png"
+                 srcset="../../assets/img/ftr-arrow-16.png 1x, ../../assets/img/ftr-arrow-32.png 2x"
+                 alt="" width="16" height="11">
+          </a>
+        </li>
+        <li class="nav__item" style="--i:1">
+          <a class="nav__link" href="../../services/">
+            <span class="nav__num">02</span>
+            <span class="nav__name">Services</span>
+            <img class="nav__arrow" src="../../assets/img/ftr-arrow-16.png"
+                 srcset="../../assets/img/ftr-arrow-16.png 1x, ../../assets/img/ftr-arrow-32.png 2x"
+                 alt="" width="16" height="11">
+          </a>
+        </li>
+        <li class="nav__item" style="--i:2">
+          <a class="nav__link" href="../../academy/">
+            <span class="nav__num">03</span>
+            <span class="nav__name">Academy</span>
+            <img class="nav__arrow" src="../../assets/img/ftr-arrow-16.png"
+                 srcset="../../assets/img/ftr-arrow-16.png 1x, ../../assets/img/ftr-arrow-32.png 2x"
+                 alt="" width="16" height="11">
+          </a>
+        </li>
+        <li class="nav__item" style="--i:3">
+          <a class="nav__link" href="../../markets/">
+            <span class="nav__num">04</span>
+            <span class="nav__name">Markets</span>
+            <img class="nav__arrow" src="../../assets/img/ftr-arrow-16.png"
+                 srcset="../../assets/img/ftr-arrow-16.png 1x, ../../assets/img/ftr-arrow-32.png 2x"
+                 alt="" width="16" height="11">
+          </a>
+        </li>
+        <li class="nav__item" style="--i:4">
+          <a class="nav__link" href="../../contact/">
+            <span class="nav__num">05</span>
+            <span class="nav__name">Contact</span>
+            <img class="nav__arrow" src="../../assets/img/ftr-arrow-16.png"
+                 srcset="../../assets/img/ftr-arrow-16.png 1x, ../../assets/img/ftr-arrow-32.png 2x"
+                 alt="" width="16" height="11">
+          </a>
+        </li>
+      </ol>
+
+      <div class="nav__foot">
+        <div class="lockup nav__lockup">
+          <span class="lockup__rule" aria-hidden="true"></span>
+          <span class="lockup__text">First Time Right</span>
+          <span class="lockup__rule" aria-hidden="true"></span>
+        </div>
+      </div>
     </nav>
   </div>
 </header>

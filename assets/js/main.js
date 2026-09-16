@@ -14,18 +14,51 @@
   var nav = document.querySelector('.nav');
 
   if (toggle && nav) {
-    toggle.addEventListener('click', function () {
-      var open = nav.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', String(open));
-      document.body.style.overflow = open ? 'hidden' : '';
+    var backdrop = document.createElement('div');
+    backdrop.className = 'nav__backdrop';
+    backdrop.setAttribute('aria-hidden', 'true');
+    nav.insertAdjacentElement('beforebegin', backdrop);
+    var closeBtn = nav.querySelector('.nav__close');
+
+    var here = location.pathname.replace(/index\.html$/, '');
+    nav.querySelectorAll('.nav__link').forEach(function (a) {
+      if (a.pathname.replace(/index\.html$/, '') === here) a.setAttribute('aria-current', 'page');
     });
 
+    var setOpen = function (open) {
+      nav.classList.toggle('is-open', open);
+      backdrop.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+      // The target is mid visibility:hidden -> visible transition when
+      // this runs; focus() on a still-hidden element is silently
+      // dropped. One rAF fires before the style flush for this frame,
+      // so it takes two to land after the drawer is actually visible.
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          (open ? closeBtn : toggle).focus({ preventScroll: true });
+        });
+      });
+    };
+
+    toggle.addEventListener('click', function () { setOpen(true); });
+    if (closeBtn) closeBtn.addEventListener('click', function () { setOpen(false); });
+    backdrop.addEventListener('click', function () { setOpen(false); });
+
     nav.addEventListener('click', function (e) {
-      if (e.target.closest('.nav__link') && nav.classList.contains('is-open')) toggle.click();
+      if (e.target.closest('.nav__link')) setOpen(false);
     });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && nav.classList.contains('is-open')) toggle.click();
+      if (!nav.classList.contains('is-open')) return;
+      if (e.key === 'Escape') { setOpen(false); return; }
+      if (e.key !== 'Tab') return;
+      // Simple focus trap: only the close button and the nav links are
+      // reachable while the drawer covers the page.
+      var focusable = nav.querySelectorAll('.nav__close, .nav__link');
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     });
   }
 
@@ -100,6 +133,53 @@
     }, { threshold: 0.6 });
 
     counters.forEach(function (el) { countObserver.observe(el); });
+  }
+
+  /* --- Enquiry form ---
+     Submits to Web3Forms over fetch() so the visitor never leaves the
+     page. The honeypot is checked here too: a filled trap means a bot,
+     so we skip the network call entirely and show the same success
+     state, which wastes the bot's time instead of tipping it off. */
+  var form = document.getElementById('enquiry');
+  if (form) {
+    var status = document.getElementById('status');
+    var submitBtn = document.getElementById('submit');
+    var trap = form.querySelector('input[name="botcheck"]');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+
+      if (trap && trap.value) {
+        status.textContent = 'Thank you — we will be in touch shortly.';
+        form.reset();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      status.textContent = 'Sending…';
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form)
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (data.success) {
+            status.textContent = 'Thank you — we will be in touch shortly.';
+            form.reset();
+          } else {
+            throw new Error(data.message || 'Submission failed');
+          }
+        })
+        .catch(function () {
+          status.textContent = 'Something went wrong sending this. Please call one of the numbers alongside instead.';
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+        });
+    });
   }
 
   /* --- Reveal and hold-point release ---

@@ -432,56 +432,256 @@ a { color: inherit; }
 }
 .header__logo img { height: clamp(1.75rem, 1.45rem + 1.2vw, 2.5rem); width: auto; }
 
-.nav { display: flex; align-items: center; gap: clamp(var(--s-5), 2.4vw, var(--s-8)); }
+/* --- Nav trigger ------------------------------------------------
+   Three bars open the drawer at every viewport. The drawer carries
+   its own close control, so the trigger never has to chase the
+   panel's edge on wide screens. */
+.nav__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: var(--s-3);
+  margin-inline: calc(var(--s-3) * -1);
+  color: var(--c-on-navy);
+  cursor: pointer;
+  transition: color var(--d-fast) var(--ease);
+}
+.nav__toggle:hover { color: var(--c-cyan-bright); }
+
+.nav__toggle-bars {
+  position: relative;
+  display: inline-block;
+  width: 26px;
+  height: 14px;
+}
+.nav__toggle-bars span {
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transition: width var(--d-base) var(--ease);
+}
+.nav__toggle-bars span:nth-child(1) { top: 0; }
+.nav__toggle-bars span:nth-child(2) { top: 6px; width: 72%; }
+.nav__toggle-bars span:nth-child(3) { top: 12px; width: 44%; }
+.nav__toggle:hover .nav__toggle-bars span { width: 100%; }
+
+/* --- Backdrop --------------------------------------------------- */
+.nav__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-menu);
+  background: rgba(5, 12, 20, 0.62);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--d-slow) var(--ease),
+              visibility var(--d-slow) var(--ease);
+}
+.nav__backdrop.is-open { opacity: 1; visibility: visible; }
+
+/* --- Drawer ------------------------------------------------------
+   A controlled-document panel: logo head, reference label, numbered
+   register of pages, direct line to a director, signature lockup.
+   Full-width sheet on a phone, a fixed reading panel on desktop. */
+.nav {
+  --nav-pad: clamp(1.5rem, 1rem + 2.4vw, 3rem);
+  position: fixed;
+  inset-block: 0;
+  right: 0;
+  z-index: calc(var(--z-menu) + 1);
+  width: min(100vw, 31rem);
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--nav-pad) var(--nav-pad);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--c-navy-deep);
+  border-left: var(--hairline) solid var(--c-navy-line);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform  var(--d-slow) var(--ease),
+              visibility var(--d-slow) var(--ease);
+}
+.nav.is-open { transform: none; visibility: visible; }
+
+/* Ghosted mark from the business card. Supplied artwork, opacity only. */
+.nav::after {
+  content: "";
+  position: absolute;
+  right: -18%;
+  bottom: 12%;
+  width: 90%;
+  aspect-ratio: 1200 / 423;
+  background: url("../img/ftr-mark.webp") no-repeat center / contain;
+  opacity: 0.035;
+  pointer-events: none;
+}
+
+.nav__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: none;
+  height: clamp(4.25rem, 3.6rem + 2.6vw, 5.5rem);
+  margin-bottom: clamp(var(--s-6), 6vh, var(--s-9));
+}
+.nav__logo { height: 1.75rem; width: auto; }
+
+.nav__close {
+  position: relative;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-right: calc(var(--s-3) * -1);
+  background: none;
+  border: none;
+  color: var(--c-on-navy);
+  cursor: pointer;
+  transition: color var(--d-fast) var(--ease);
+}
+.nav__close:hover { color: var(--c-cyan-bright); }
+.nav__close-x::before,
+.nav__close-x::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 1.5px;
+  background: currentColor;
+  transform: translate(-50%, -50%) rotate(0deg) scaleX(0);
+  transition: transform var(--d-base) var(--ease);
+}
+.nav.is-open .nav__close-x::before {
+  transform: translate(-50%, -50%) rotate(45deg) scaleX(1);
+  transition-delay: 240ms;
+}
+.nav.is-open .nav__close-x::after {
+  transform: translate(-50%, -50%) rotate(-45deg) scaleX(1);
+  transition-delay: 300ms;
+}
+.nav__close:hover .nav__close-x::before { transform: translate(-50%, -50%) rotate(135deg) scaleX(1); }
+.nav__close:hover .nav__close-x::after  { transform: translate(-50%, -50%) rotate(45deg) scaleX(1); }
+
+.nav__label {
+  display: block;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--c-on-navy-mute);
+  margin-bottom: var(--s-4);
+}
+
+.nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: var(--hairline) solid var(--c-navy-line);
+}
+
+/* Each row owns its bottom rule: a static hairline that draws in on
+   open, and a cyan one that sweeps across on hover. */
+.nav__item {
+  position: relative;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--d-base) var(--ease),
+              transform var(--d-base) var(--ease);
+}
+.nav__item::before,
+.nav__item::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: var(--hairline);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.nav__item::before {
+  background: var(--c-navy-line);
+  transition: transform var(--d-slow) var(--ease);
+}
+.nav__item::after {
+  background: var(--c-cyan);
+  transition: transform var(--d-base) var(--ease);
+}
+.nav.is-open .nav__item {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(180ms + var(--i, 0) * 60ms);
+}
+.nav.is-open .nav__item::before {
+  transform: scaleX(1);
+  transition-delay: calc(220ms + var(--i, 0) * 60ms);
+}
+
 .nav__link {
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-medium);
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+  align-items: center;
+  padding-block: clamp(var(--s-4), 2.2vh, var(--s-5));
   color: var(--c-on-navy);
   text-decoration: none;
-  padding-block: var(--s-2);
-  border-bottom: var(--hairline) solid transparent;
-  transition: color var(--d-fast) var(--ease),
-              border var(--d-fast) var(--ease);
 }
-.nav__link:hover,
-.nav__link[aria-current="page"] {
-  color: var(--c-cyan-bright);
-  border-bottom-color: var(--c-cyan);
+.nav__num {
+  font-family: var(--f-body);
+  font-size: var(--fs-label);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  color: var(--c-on-navy-mute);
+  transition: color var(--d-fast) var(--ease);
+}
+.nav__name {
+  font-family: var(--f-display);
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.01em;
+  transition: transform var(--d-base) var(--ease),
+              color var(--d-fast) var(--ease);
+}
+.nav__arrow {
+  width: 16px;
+  height: auto;
+  opacity: 0.35;
+  transform: translateX(-6px);
+  transition: transform var(--d-base) var(--ease),
+              opacity var(--d-base) var(--ease);
 }
 
-.nav__toggle { display: none; }
+.nav__link:hover .nav__num,
+.nav__link:focus-visible .nav__num { color: var(--c-cyan); }
+.nav__link:hover .nav__name,
+.nav__link:focus-visible .nav__name { transform: translateX(6px); color: var(--c-white); }
+.nav__link:hover .nav__arrow,
+.nav__link:focus-visible .nav__arrow { opacity: 1; transform: none; }
+.nav__item:hover::after,
+.nav__item:focus-within::after { transform: scaleX(1); }
 
-@media (max-width: 860px) {
-  .nav__toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--s-3);
-    background: none;
-    border: none;
-    padding: var(--s-3);
-    color: var(--c-on-navy);
-    font-size: var(--fs-label);
-    letter-spacing: var(--ls-label);
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  .nav {
-    position: fixed;
-    inset: 0;
-    z-index: var(--z-menu);
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: var(--s-6);
-    padding: var(--gutter);
-    background: var(--c-navy-deep);
-    transform: translateY(-100%);
-    visibility: hidden;
-    transition: transform  var(--d-base) var(--ease),
-                visibility var(--d-base) var(--ease);
-  }
-  .nav.is-open { transform: none; visibility: visible; }
-  .nav__link { font-family: var(--f-display); font-size: var(--fs-h3); }
+.nav__link[aria-current="page"] .nav__num,
+.nav__link[aria-current="page"] .nav__name { color: var(--c-cyan-bright); }
+.nav__item:has([aria-current="page"])::after { transform: scaleX(1); }
+
+.nav__foot {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding-top: clamp(var(--s-7), 6vh, var(--s-10));
+  opacity: 0;
+  transition: opacity var(--d-slow) var(--ease);
+}
+.nav.is-open .nav__foot { opacity: 1; transition-delay: 520ms; }
+
+.nav__lockup { justify-content: flex-start; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nav, .nav__item, .nav__item::before, .nav__foot,
+  .nav__close-x::before, .nav__close-x::after { transition-delay: 0ms !important; }
 }
 
 /* --- FOOTER --------------------------------------------------- */
@@ -588,19 +788,6 @@ a { color: inherit; }
    accident rather than as structure. */
 
 .gate__head--flush { margin-bottom: 0; }
-
-/* --- Nav CTA ---------------------------------------------------- */
-
-.nav__link--cta {
-  padding-inline: var(--s-5);
-  border: var(--hairline) solid var(--c-navy-line);
-  border-bottom-color: var(--c-navy-line);
-  color: var(--c-cyan-bright);
-}
-.nav__link--cta:hover {
-  border-color: var(--c-cyan);
-  background: rgba(0, 180, 230, 0.10);
-}
 
 /* --- Flex and grid item overflow safety -------------------------
    Items default to min-width:auto and will not shrink below their
