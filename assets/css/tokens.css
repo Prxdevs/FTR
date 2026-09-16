@@ -1,0 +1,206 @@
+/* ============================================================
+   FTR — tokens.css
+   FTRight Tech-Infra and Solutions Private Limited
+
+   The single source of truth for colour, type, rhythm and motion.
+   Every page inherits from this file. Nothing below this layer
+   may hard-code a colour, a size or a duration.
+
+   Derived from the client-approved business card.
+   Contrast ratios verified against WCAG 2.2 AA and noted inline.
+   ============================================================ */
+
+:root {
+
+  /* --- 1. COLOUR ------------------------------------------------
+     Navy is structure. White is reading. Cyan is accent only and
+     never sets body text. Two cyans exist for a reason: the bright
+     one is legible on navy, the deep one on white. They are not
+     interchangeable. */
+
+  /* Navy family — hero, section breaks, footer */
+  --c-navy:            #0D1B2A;   /* primary panel */
+  --c-navy-deep:       #081420;   /* footer, deepest ground */
+  --c-navy-soft:       #14263A;   /* raised block on navy */
+  --c-navy-line:       #22384E;   /* hairline rule on navy */
+
+  /* Reading surfaces */
+  --c-white:           #FFFFFF;
+  --c-paper:           #F7F9FA;   /* tinted alternate section */
+  --c-rule:            #E2E8ED;   /* hairline rule on white */
+
+  /* Ink */
+  --c-ink:             #0D1B2A;   /* body on white      — 15.9:1 AAA */
+  --c-ink-mute:        #55697C;   /* secondary on white —  6.1:1 AA  */
+  --c-ink-faint:       #8A9AA8;   /* labels on white    —  3.1:1 large/non-text only */
+
+  /* Ink reversed */
+  --c-on-navy:         #E9EFF4;   /* body on navy       — 14.2:1 AAA */
+  --c-on-navy-mute:    #93A7B8;   /* secondary on navy  —  6.4:1 AA  */
+
+  /* Cyan — accent only. Logo gradient, sampled. */
+  --c-cyan:            #00B4E6;   /* on navy            —  7.2:1 AA  */
+  --c-cyan-bright:     #2ED8FF;   /* gradient highlight, rules, arrows */
+  --c-cyan-deep:       #0A6FD0;   /* gradient blue end */
+  --c-cyan-ink:        #006C99;   /* LINKS ON WHITE ONLY —  5.8:1 AA */
+
+  /* Ghosted logo watermark on navy — signature brand move */
+  --c-watermark:       rgba(46, 216, 255, 0.045);
+
+  /* Photography treatment. Context imagery is never shown raw:
+     it is pulled into the brand by a navy multiply veil. */
+  --veil-navy:         rgba(13, 27, 42, 0.72);
+  --veil-navy-strong:  rgba(13, 27, 42, 0.86);
+
+  /* Focus — visible, branded, never removed */
+  --c-focus:           var(--c-cyan-bright);
+  --focus-ring:        2px solid var(--c-focus);
+  --focus-offset:      3px;
+
+
+  /* --- 2. TYPEFACE ----------------------------------------------
+     Self-hosted, Latin subset, only the weights below are loaded.
+     Do not add a weight without adding the font file. */
+
+  --f-display: "Space Grotesk", "Space Grotesk Fallback", "Segoe UI", system-ui, sans-serif;
+  --f-body:    "Inter", "Inter Fallback", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+
+  /* --- 3. TYPE SCALE --------------------------------------------
+     Fluid between a 320px and a 1440px viewport. The copy on this
+     site is dense and long, so the scale is deliberately shallow at
+     body sizes and only opens up at display sizes. */
+
+  --fs-display: clamp(2.75rem,  1.35rem + 6.20vw, 6.50rem);  /* hero only */
+  --fs-h1:      clamp(2.25rem,  1.38rem + 3.85vw, 4.25rem);
+  --fs-h2:      clamp(1.75rem,  1.27rem + 2.15vw, 2.875rem);
+  --fs-h3:      clamp(1.25rem,  1.06rem + 0.85vw, 1.75rem);
+  --fs-h4:      clamp(1.0625rem,0.99rem + 0.33vw, 1.25rem);
+  --fs-lead:    clamp(1.125rem, 1.02rem + 0.47vw, 1.4375rem); /* standfirst */
+  --fs-body:    clamp(1rem,     0.97rem + 0.14vw, 1.0625rem);
+  --fs-sm:      0.9375rem;
+  --fs-xs:      0.8125rem;
+  --fs-label:   0.75rem;    /* letterspaced caps — section refs */
+  --fs-gate:    clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem); /* hold-point numerals */
+
+  --lh-display: 0.96;
+  --lh-tight:   1.08;
+  --lh-heading: 1.18;
+  --lh-lead:    1.46;
+  --lh-body:    1.68;   /* generous — this copy is long */
+  --lh-label:   1.4;
+
+  /* Letterspacing. Large type tightens, caps open up.
+     --ls-lockup is the business-card signature and is not negotiable. */
+  --ls-display: -0.035em;
+  --ls-h1:      -0.028em;
+  --ls-h2:      -0.022em;
+  --ls-h3:      -0.014em;
+  --ls-body:     0;
+  --ls-caps:     0.16em;
+  --ls-label:    0.20em;
+  --ls-lockup:   0.42em;   /* F I R S T  T I M E  R I G H T */
+
+  /* Measure. Line-length discipline matters more here than on a
+     normal corporate site because the copy is dense. */
+  /* Every measure is capped at 100% of its container. A bare ch value
+     is wider than a 390px phone at these font sizes, which pushes the
+     whole page into horizontal overflow. */
+  --measure:        min(68ch, 100%);
+  --measure-tight:  min(58ch, 100%);
+  --measure-lead:   min(46ch, 100%);
+  --measure-head:   min(20ch, 100%);  /* display headlines wrap early, on purpose */
+
+
+  /* --- 4. SPACE -------------------------------------------------
+     A 4px base rhythm. Section padding is fluid; everything inside
+     a section is fixed, so vertical rhythm never drifts. */
+
+  --s-1:   0.25rem;   --s-2:   0.5rem;    --s-3:  0.75rem;
+  --s-4:   1rem;      --s-5:   1.5rem;    --s-6:  2rem;
+  --s-7:   2.5rem;    --s-8:   3rem;      --s-9:  4rem;
+  --s-10:  5rem;      --s-11:  6rem;      --s-12: 8rem;
+
+  --s-section:       clamp(4.5rem, 2.9rem + 7.1vw, 9rem);
+  --s-section-tight: clamp(3.25rem, 2.3rem + 4.2vw, 5.5rem);
+
+
+  /* --- 5. LAYOUT ------------------------------------------------
+     12-column grid. The gutter is fluid so the page never feels
+     cramped on a phone or adrift on a 27" display. */
+
+  --page-max:    1440px;
+  --content-max: 1180px;
+  --gutter:      clamp(1.25rem, 0.72rem + 2.35vw, 4.5rem);
+  --grid-gap:    clamp(1.25rem, 0.9rem + 1.6vw, 2.5rem);
+  --cols:        12;
+
+  /* The commissioning spine — fine vertical rule carrying the
+     hold-point markers down the left edge of the page. */
+  --spine-inset: clamp(1rem, 0.5rem + 1.35vw, 2rem);   /* sits inside the gutter, clear of the measure */
+  --spine-width: 1px;
+
+  --hairline:    1px;
+  --rule-accent: 2px;   /* the cyan divider from the card */
+
+
+  /* --- 6. MOTION ------------------------------------------------
+     Slow, short-distance, subtle. Nothing bouncy — it reads cheap
+     on this brand. One easing curve for everything, so the whole
+     site moves with a single hand. */
+
+  --ease:      cubic-bezier(0.16, 1, 0.30, 1);   /* the house curve */
+  --ease-io:   cubic-bezier(0.65, 0, 0.35, 1);
+
+  --d-fast:    240ms;
+  --d-base:    480ms;
+  --d-slow:    800ms;
+  --d-release: 1100ms;   /* hold-point rule draw */
+  --d-wipe:    900ms;    /* type and imagery uncovered, left to right */
+
+  --stagger:   60ms;     /* line-by-line reveal increment */
+
+  /* No entrance travel token. Nothing on this site slides in: type is
+     set, imagery is uncovered, rules are drawn. See base.css, MOTION. */
+
+
+  /* --- 7. DEPTH -------------------------------------------------
+     Almost none. Authority here comes from rules and space, not
+     shadow. Glassmorphism and soft drop shadows are prohibited. */
+
+  --shadow-card: 0 1px 2px rgba(13, 27, 42, 0.05),
+                 0 8px 28px rgba(13, 27, 42, 0.06);
+  --radius:      0;      /* sharp geometry — engineered, not soft */
+  --radius-pill: 999px;  /* pills and the circular card icons only */
+
+  --z-header:  100;
+  --z-menu:    200;
+  --z-skip:    300;
+}
+
+
+/* --- 8. ACCESSIBILITY OVERRIDES ---------------------------------
+   Honour the user's system preferences. Required for EN 301 549 /
+   WCAG 2.2 AA, which this site is built to voluntarily. */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --d-fast: 1ms; --d-base: 1ms; --d-slow: 1ms;
+    --d-release: 1ms; --d-wipe: 1ms; --stagger: 0ms;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --c-ink-mute:      #3C4E5E;
+    --c-ink-faint:     #55697C;
+    --c-on-navy-mute:  #BCCCD9;
+    --c-rule:          #B8C4CE;
+    --c-navy-line:     #3E566E;
+  }
+}

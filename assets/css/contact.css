@@ -1,0 +1,224 @@
+/* ============================================================
+   FTR — contact.css
+   Contact page only. Depends on tokens.css and base.css.
+   ============================================================ */
+
+/* --- Page header ---------------------------------------------- */
+
+.chero {
+  background: var(--c-navy);
+  color: var(--c-on-navy);
+  padding-block: calc(var(--s-12) + 2rem) var(--s-10);
+}
+.chero__label { color: var(--c-cyan); margin-bottom: var(--s-6); }
+.chero__title { color: var(--c-white); margin-bottom: var(--s-6); }
+.chero__lede {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  color: var(--c-on-navy-mute);
+  max-width: min(54ch, 100%);
+  text-wrap: pretty;
+}
+
+/* --- Layout --------------------------------------------------- */
+
+.contact__form  { grid-column: 1 / span 7; min-width: 0; }
+.contact__aside { grid-column: 9 / span 4; min-width: 0; }
+
+@media (max-width: 900px) {
+  .contact__form  { grid-column: 1 / -1; }
+  .contact__aside { grid-column: 1 / -1; margin-top: var(--s-9); }
+}
+
+/* --- Form ------------------------------------------------------
+   Controls are ruled, not boxed: a border-bottom keeps the page
+   reading as a document rather than an app form. */
+
+.form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--grid-gap);
+}
+@media (max-width: 620px) { .form__row { grid-template-columns: 1fr; } }
+
+.field { margin-bottom: var(--s-7); min-width: 0; }
+
+.field__label {
+  display: block;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--c-ink-mute);
+  margin-bottom: var(--s-3);
+}
+.field__req {
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-caps);
+  color: var(--c-ink-faint);
+}
+
+.field__input {
+  width: 100%;
+  padding: var(--s-3) 0;
+  font-size: var(--fs-body);
+  color: var(--c-ink);
+  background: transparent;
+  border: none;
+  border-bottom: var(--hairline) solid var(--c-rule);
+  border-radius: 0;
+  transition: border-color var(--d-fast) var(--ease);
+}
+.field__input:hover { border-bottom-color: var(--c-ink-faint); }
+.field__input:focus-visible {
+  outline: none;
+  border-bottom-color: var(--c-cyan-ink);
+  border-bottom-width: var(--rule-accent);
+}
+.field__input::placeholder { color: var(--c-ink-faint); }
+
+.field__input--area { resize: vertical; min-height: 8rem; line-height: var(--lh-body); }
+
+/* The select needs its own arrow once the native border is removed. */
+select.field__input {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--c-ink-mute) 50%),
+                    linear-gradient(135deg, var(--c-ink-mute) 50%, transparent 50%);
+  background-position: calc(100% - 12px) 1.35em, calc(100% - 7px) 1.35em;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: var(--s-7);
+}
+
+.field__help {
+  margin-top: var(--s-3);
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  text-wrap: pretty;
+}
+
+/* Invalid only after the browser has something to judge. */
+.field__input:user-invalid { border-bottom-color: #B3261E; }
+
+.form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-5);
+  padding-top: var(--s-5);
+  border-top: var(--hairline) solid var(--c-rule);
+}
+.form__privacy {
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  max-width: min(34ch, 100%);
+  text-wrap: pretty;
+}
+
+/* Honeypot — off-screen rather than display:none, which some bots
+   check for. Never announced to assistive technology. */
+.form__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form__status {
+  margin-top: var(--s-5);
+  padding: var(--s-4) var(--s-5);
+  font-size: var(--fs-sm);
+  border-left: var(--rule-accent) solid var(--c-rule);
+  background: var(--c-paper);
+  display: none;
+}
+.form__status.is-shown { display: block; }
+.form__status.is-ok    { border-left-color: var(--c-cyan-ink); }
+.form__status.is-error { border-left-color: #B3261E; }
+
+/* --- Aside ----------------------------------------------------- */
+
+.aside__title { padding-bottom: var(--s-4); border-bottom: var(--hairline) solid var(--c-rule); }
+.aside__title--spaced { margin-top: var(--s-9); }
+
+.person-card { padding-block: var(--s-6); border-bottom: var(--hairline) solid var(--c-rule); }
+
+.person-card__name {
+  font-family: var(--f-display);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-medium);
+  margin-bottom: var(--s-2);
+}
+.person-card__role {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--c-cyan-ink);
+  margin-bottom: var(--s-3);
+}
+.person-card__meta {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  margin-bottom: var(--s-4);
+  text-wrap: pretty;
+}
+.person-card__tel {
+  display: inline-block;
+  font-weight: var(--fw-medium);
+  color: var(--c-cyan-ink);
+  text-decoration: none;
+  border-bottom: var(--hairline) solid currentColor;
+}
+/* Email is plain text, not a mailto link — harvesting rule in the
+   project brief. The form is the working route. */
+.person-card__mail { font-size: var(--fs-sm); color: var(--c-ink-mute); margin-top: var(--s-2); }
+
+.aside__addr {
+  font-style: normal;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--c-ink-mute);
+  padding-top: var(--s-5);
+}
+
+/* --- What happens next ----------------------------------------- */
+
+.path-lede {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  color: var(--c-on-navy-mute);
+  max-width: min(52ch, 100%);
+  margin-bottom: var(--s-9);
+  text-wrap: pretty;
+}
+
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+
+.step {
+  min-width: 0;
+  padding: var(--s-6) var(--s-6) 0 0;
+  border-top: var(--hairline) solid var(--c-navy-line);
+}
+.step + .step { padding-left: var(--s-6); }
+
+.step__num {
+  display: block;
+  font-family: var(--f-display);
+  font-size: var(--fs-gate);
+  letter-spacing: var(--ls-caps);
+  color: var(--c-cyan);
+  margin-bottom: var(--s-5);
+}
+.step__title { color: var(--c-white); margin-bottom: var(--s-3); }
+.step__text  { font-size: var(--fs-sm); color: var(--c-on-navy-mute); text-wrap: pretty; }
+
+@media (max-width: 900px) { .steps { grid-template-columns: repeat(2, 1fr); row-gap: var(--s-6); } }
+@media (max-width: 560px) {
+  .steps { grid-template-columns: 1fr; }
+  .step + .step { padding-left: 0; }
+}
+
+/* The company address, shown as text rather than a mailto link —
+   harvesting rule in the project brief. The form is the working route. */
+.aside__mail { color: var(--c-ink); font-weight: var(--fw-medium); }

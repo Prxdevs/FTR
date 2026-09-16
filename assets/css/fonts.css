@@ -1,0 +1,65 @@
+/* ============================================================
+   FTR — fonts.css
+   Self-hosted variable fonts, Latin subset.
+
+   Not served from the Google Fonts CDN: that transfers the visitor's
+   IP address to a US endpoint, which has been ruled a GDPR breach in
+   the EU. This site is built to the European standard voluntarily,
+   so the fonts are served from the edge with everything else.
+
+   Two variable files cover every weight on the site — 70 KB total,
+   against roughly 190 KB for the five static cuts they replace.
+
+   font-display: swap keeps text visible during load. The metric-
+   matched fallbacks below make the swap invisible, which is what
+   holds CLS under 0.1 on a slow connection.
+   ============================================================ */
+
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;          /* variable range */
+  font-display: swap;
+  src: url("/assets/fonts/space-grotesk-var-latin.woff2") format("woff2-variations"),
+       url("/assets/fonts/space-grotesk-var-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                 U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+                 U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;          /* variable range */
+  font-display: swap;
+  src: url("/assets/fonts/inter-var-latin.woff2") format("woff2-variations"),
+       url("/assets/fonts/inter-var-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                 U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+                 U+FEFF, U+FFFD;
+}
+
+/* --- Metric-matched fallbacks ---
+   Shown while the webfonts load. The overrides make the fallback
+   occupy near-identical space so the swap does not shift the page.
+   Referenced from the font stacks in tokens.css. */
+
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Segoe UI"), local("Helvetica Neue"), local("Arial");
+  size-adjust: 107%;
+  ascent-override: 90%;
+  descent-override: 22.5%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Space Grotesk Fallback";
+  src: local("Segoe UI"), local("Helvetica Neue"), local("Arial");
+  size-adjust: 103%;
+  ascent-override: 95%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}

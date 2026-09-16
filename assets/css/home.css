@@ -1,0 +1,1270 @@
+/* ============================================================
+   FTR — home.css
+   Section styles for index.html only.
+   Depends on tokens.css and base.css. Loads last.
+
+   Section order follows the page: hero, what FTR is, services,
+   the standard, two paths, band, markets, leadership, why, from
+   the cluster, CTA, footer.
+   ============================================================ */
+
+
+/* ============================================================
+   THE SPINE
+   A fixed hairline down the left edge carrying the arrow lifted
+   from the FTR mark. The fill grows with scroll progress and the
+   arrow rides its leading edge: the page reads as a programme
+   being walked through, and the thing walking you through it is
+   the client's own mark.
+
+   --progress (0–1) is set on :root by main.js.
+   ============================================================ */
+
+.spine {
+  position: fixed;
+  left: var(--spine-inset);
+  top: 18vh;
+  bottom: 18vh;
+  width: 2rem;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.spine__rule,
+.spine__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--spine-width);
+}
+.spine__rule { bottom: 0; background: var(--c-rule); }
+
+.spine__fill {
+  height: 100%;
+  background: linear-gradient(180deg, var(--c-cyan-deep), var(--c-cyan-bright));
+  transform: scaleY(var(--progress, 0));
+  transform-origin: top center;
+}
+
+/* The arrow rides the leading edge of the fill, marking how far
+   through the programme the reader has got.
+
+   It is NOT rotated. The arrow in the FTR mark rises to the right —
+   that gesture is the brand. Turning it to point downwards inverts
+   the meaning, and rotating a locked mark is a modification of it.
+   So the marker travels down the rule while the mark itself stays
+   in its true orientation, pointing forward into the page. */
+.spine__arrow {
+  position: absolute;
+  left: 0;
+  top: calc(var(--progress, 0) * 100%);
+  width: 30px;
+  height: auto;
+  transform: translate(-30%, -55%);
+  filter: drop-shadow(0 1px 3px rgba(8, 20, 32, 0.35));
+}
+
+/* Below 1100px the page is too narrow to carry the spine without
+   crowding the measure. */
+@media (max-width: 1100px) { .spine { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .spine__fill, .spine__arrow { transition: none; }
+}
+
+
+/* ============================================================
+   01 · HERO
+   The business must land in five seconds. Headline, then a plain
+   descriptor naming the facility types, then the four services
+   on a strip pinned to the base — all above the fold.
+   ============================================================ */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  background: var(--c-navy);
+  color: var(--c-on-navy);
+  overflow: hidden;
+}
+
+.hero__media { position: absolute; inset: 0; }
+.hero__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.6) contrast(1.08);
+}
+
+/* One element, two stacked gradient layers rather than two pseudo-
+   elements: multiple backgrounds composite predictably and there is
+   only one box to reason about. The horizontal pass weights the
+   reading side; the vertical pass seats the type top and bottom. */
+.hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, rgba(8, 20, 32, 0.80) 0%,
+                            rgba(8, 20, 32, 0.45) 46%,
+                            rgba(8, 20, 32, 0.05) 100%),
+    linear-gradient(180deg, rgba(8, 20, 32, 0.55) 0%,
+                            rgba(8, 20, 32, 0.30) 45%,
+                            rgba(8, 20, 32, 0.82) 100%);
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  min-width: 0;                /* flex/grid items must be allowed to shrink */
+  align-self: end;
+  padding-block: calc(var(--s-12) + 3rem) var(--s-9);
+}
+
+.hero__label { margin-bottom: var(--s-6); color: var(--c-cyan); }
+
+.hero__title { color: var(--c-white); margin-bottom: var(--s-6); }
+
+/* The line that actually answers "what is this company". */
+.hero__desc {
+  max-width: min(52ch, 100%);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  color: var(--c-on-navy-mute);
+  margin-bottom: var(--s-8);
+  text-wrap: pretty;
+}
+.hero__desc strong { color: var(--c-white); font-weight: var(--fw-medium); }
+
+.hero__actions { display: flex; flex-wrap: wrap; gap: var(--s-4); }
+
+/* --- Capability strip --- */
+
+.hero__strip {
+  position: relative;
+  z-index: 2;
+  border-top: var(--hairline) solid var(--c-navy-line);
+  background: rgba(8, 20, 32, 0.55);
+  backdrop-filter: saturate(140%) blur(6px);
+}
+
+.strip { display: grid; grid-template-columns: repeat(4, 1fr); }
+
+.strip__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  min-width: 0;
+  padding: var(--s-5) var(--s-5) var(--s-5) 0;
+  text-decoration: none;
+  color: var(--c-on-navy);
+  transition: color var(--d-fast) var(--ease);
+}
+.strip__item + .strip__item { padding-left: var(--s-5); }
+.strip__item + .strip__item::before {
+  content: "";
+  position: absolute;
+  left: 0; top: var(--s-5); bottom: var(--s-5);
+  width: var(--hairline);
+  background: var(--c-navy-line);
+}
+.strip__item:hover { color: var(--c-cyan-bright); }
+
+.strip__num {
+  font-family: var(--f-display);
+  font-size: var(--fs-gate);
+  letter-spacing: var(--ls-caps);
+  color: var(--c-cyan);
+}
+.strip__name {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+@media (max-width: 860px) {
+  .strip { grid-template-columns: repeat(2, 1fr); }
+  .strip__item { padding: var(--s-4) var(--s-4) var(--s-4) 0; }
+  .strip__item:nth-child(odd)  { padding-left: 0; }
+  .strip__item:nth-child(even) { padding-left: var(--s-4); }
+  .strip__item:nth-child(odd)::before { display: none; }
+  .strip__item:nth-child(n+3) { border-top: var(--hairline) solid var(--c-navy-line); }
+}
+@media (max-width: 460px) {
+  .strip__name { font-size: var(--fs-xs); }
+}
+
+
+/* ============================================================
+   02 · WHAT FTR IS
+   ============================================================ */
+
+.about__head { grid-column: 1 / span 5; }
+.about__body { grid-column: 7 / span 6; }
+
+@media (max-width: 900px) {
+  .about__head { grid-column: 1 / -1; margin-bottom: var(--s-6); }
+  .about__body { grid-column: 1 / -1; }
+}
+
+/* --- Facts. Numbers, not adjectives. --- */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: var(--s-10);
+}
+
+.fact {
+  min-width: 0;
+  padding: var(--s-6) var(--s-6) 0 0;
+  border-top: var(--hairline) solid var(--c-rule);
+}
+.fact + .fact { padding-left: var(--s-6); }
+
+.fact__label {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--c-ink-faint);
+  margin-bottom: var(--s-4);
+}
+
+.fact__value {
+  font-family: var(--f-display);
+  font-size: clamp(2.5rem, 1.7rem + 3.4vw, 4rem);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  letter-spacing: var(--ls-h1);
+  color: var(--c-navy);
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 var(--s-4);
+}
+.fact__value--text { font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem); }
+
+.fact__unit {
+  font-size: 0.4em;
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--c-cyan-ink);
+  margin-left: 0.3em;
+  vertical-align: 0.9em;
+}
+
+.fact__note {
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--c-ink-mute);
+  text-wrap: pretty;
+}
+
+@media (max-width: 900px) { .facts { grid-template-columns: repeat(2, 1fr); row-gap: var(--s-6); } }
+@media (max-width: 460px) { .facts { grid-template-columns: 1fr; } .fact + .fact { padding-left: 0; } }
+
+
+/* ============================================================
+   03 · SERVICES
+   All four, identical structure. The consistency across them is
+   what makes the block read as engineered rather than written.
+   ============================================================ */
+
+/* Number, then title + promise, then the detail. Three columns rather
+   than two: with the prose capped at its measure, a single content
+   column left the right third of four screens empty. */
+.service {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: var(--grid-gap);
+  padding-block: var(--s-9);
+  border-top: var(--hairline) solid var(--c-rule);
+}
+.service:last-child { border-bottom: var(--hairline) solid var(--c-rule); }
+
+.service__num {
+  font-family: var(--f-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-caps);
+  color: var(--c-cyan-ink);
+  line-height: 1.2;
+}
+
+.service__head  { min-width: 0; }
+.service__main  { display: contents; }
+
+.service__title { margin-bottom: var(--s-4); }
+
+.service__lede {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  color: var(--c-ink);
+  max-width: min(32ch, 100%);
+  text-wrap: pretty;
+}
+
+.service__prose { min-width: 0; color: var(--c-ink-mute); max-width: min(56ch, 100%); }
+.service__link  { margin-top: var(--s-7); }
+
+@media (max-width: 1000px) {
+  .service { grid-template-columns: 4.5rem minmax(0, 1fr); }
+  .service__head { grid-column: 2; }
+  .service__title { margin-bottom: var(--s-4); }
+  .service__lede { max-width: min(46ch, 100%); margin-bottom: var(--s-6); }
+  .service__prose { grid-column: 2; }
+}
+@media (max-width: 700px) {
+  .service { grid-template-columns: 1fr; gap: var(--s-4); padding-block: var(--s-8); }
+  .service__head, .service__prose { grid-column: 1; }
+  .service__num { font-size: var(--fs-gate); }
+}
+
+
+/* ============================================================
+   04 · THE STANDARD
+   The signature section. Navy, ghosted arrow watermark, no
+   photography. Five commitments as five hold points, released in
+   sequence. The strongest section gets the most restraint.
+   ============================================================ */
+
+.standard { position: relative; overflow: hidden; }
+
+.standard__watermark {
+  position: absolute;
+  right: calc(var(--gutter) * -2);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(62%, 50rem);
+  pointer-events: none;
+  user-select: none;
+}
+.standard__watermark img {
+  width: 100%;
+  height: auto;
+  /* The supplied artwork is used as-is. No recolouring: the brand
+     gradient simply ghosts through against the navy. Opacity is the
+     only treatment, which keeps this usage rather than redesign. */
+  opacity: 0.10;
+}
+@media (max-width: 900px) { .standard__watermark { display: none; } }
+
+.standard__inner { position: relative; }
+
+.standard__head { grid-column: 1 / span 5; }
+.standard__head .h2 { color: var(--c-white); margin-block: var(--s-5) var(--s-6); }
+
+.standard__note {
+  margin-top: var(--s-8);
+  padding-top: var(--s-6);
+  border-top: var(--hairline) solid var(--c-navy-line);
+  font-size: var(--fs-sm);
+  color: var(--c-on-navy-mute);
+  max-width: min(34ch, 100%);
+  text-wrap: pretty;
+}
+
+.standard__list { grid-column: 7 / span 6; }
+
+.commit {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  gap: var(--s-5);
+  padding-block: var(--s-6);
+  border-top: var(--hairline) solid var(--c-navy-line);
+}
+.commit:last-child { border-bottom: var(--hairline) solid var(--c-navy-line); }
+
+.commit__num {
+  font-family: var(--f-display);
+  font-size: var(--fs-gate);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-caps);
+  color: var(--c-cyan);
+  padding-top: 0.35em;
+}
+
+.commit__text {
+  font-size: var(--fs-h4);
+  line-height: 1.42;
+  color: var(--c-white);
+  font-weight: var(--fw-regular);
+  text-wrap: pretty;
+}
+
+/* Each commitment releases its own rule, staggered down the list. */
+.commit::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: -1px;
+  height: var(--hairline);
+  background: var(--c-cyan);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--d-release) var(--ease);
+  transition-delay: var(--commit-delay, 0ms);
+}
+.standard.is-released .commit::after { transform: scaleX(1); }
+
+.commit:nth-child(1) { --commit-delay:   0ms; }
+.commit:nth-child(2) { --commit-delay: 120ms; }
+.commit:nth-child(3) { --commit-delay: 240ms; }
+.commit:nth-child(4) { --commit-delay: 360ms; }
+.commit:nth-child(5) { --commit-delay: 480ms; }
+
+@media (max-width: 900px) {
+  .standard__head { grid-column: 1 / -1; margin-bottom: var(--s-8); }
+  .standard__list { grid-column: 1 / -1; }
+}
+
+
+/* ============================================================
+   05 · TWO PATHS
+   The two audiences overlap almost nowhere, so they get two
+   panels divided by the thin cyan rule from the business card,
+   never one blended message.
+   ============================================================ */
+
+.paths { display: grid; grid-template-columns: 1fr 1fr; }
+
+.path {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(var(--s-6), 3vw, var(--s-9)) clamp(var(--s-6), 3vw, var(--s-9))
+           clamp(var(--s-6), 3vw, var(--s-9)) 0;
+  text-decoration: none;
+  transition: background var(--d-base) var(--ease);
+}
+.path + .path { padding-left: clamp(var(--s-6), 3vw, var(--s-9)); }
+.path:hover { background: var(--c-paper); }
+
+.path + .path::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: clamp(var(--s-6), 3vw, var(--s-9));
+  bottom: clamp(var(--s-6), 3vw, var(--s-9));
+  width: var(--rule-accent);
+  background: var(--c-cyan);
+}
+
+.path__label { margin-bottom: var(--s-5); }
+.path__title { margin-bottom: var(--s-4); }
+.path__text {
+  color: var(--c-ink-mute);
+  max-width: min(38ch, 100%);
+  margin-bottom: var(--s-7);
+  text-wrap: pretty;
+}
+.path__cta { margin-top: auto; align-self: flex-start; }
+
+@media (max-width: 860px) {
+  .paths { grid-template-columns: 1fr; }
+  .path, .path + .path { padding-inline: 0; }
+  .path + .path::before {
+    left: 0; right: 0;
+    top: 0; bottom: auto;
+    width: auto; height: var(--rule-accent);
+  }
+}
+
+
+/* ============================================================
+   SECTION BREAK · IMAGE BAND
+   The page is deliberately light on photography, so the few
+   images present are large and calm. No caption, no heading.
+   ============================================================ */
+
+/* Exyte's full-bleed image block: photograph, heading, one paragraph,
+   one text link. Previously this was an 82%-opaque slab carrying a
+   single letterspaced line — the picture never actually read, and the
+   page went six sections between images. Both are fixed here. */
+.band {
+  position: relative;
+  display: grid;
+  align-items: end;
+  min-height: clamp(26rem, 19rem + 27vw, 40rem);
+  background: var(--c-navy);
+  overflow: hidden;
+}
+.band--tall { min-height: clamp(29rem, 21rem + 31vw, 45rem); }
+
+.band__media { position: absolute; inset: 0; }
+.band__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.72) contrast(1.08);
+}
+
+/* Same construction as the hero: one element, two stacked gradients.
+   The horizontal pass weights the reading side, the vertical pass
+   seats the type on the baseline. Light enough that the photograph
+   survives — it is there to be seen, not to be tinted out. */
+.band__media::after {
+  z-index: 1;
+  mix-blend-mode: normal;
+  background:
+    linear-gradient(95deg,  rgba(8, 20, 32, 0.92) 0%,
+                            rgba(8, 20, 32, 0.74) 40%,
+                            rgba(8, 20, 32, 0.18) 100%),
+    linear-gradient(180deg, rgba(8, 20, 32, 0.34) 0%,
+                            rgba(8, 20, 32, 0.10) 42%,
+                            rgba(8, 20, 32, 0.72) 100%);
+}
+
+/* Narrow screens: the copy runs the full width, so a horizontal veil
+   leaves the end of every line sitting on bare photograph. The block
+   seats its copy at the bottom, so the veil becomes vertical — the
+   picture stays open at the top and closes under the text. */
+@media (max-width: 900px) {
+  .band__media::after {
+    background:
+      linear-gradient(180deg, rgba(8, 20, 32, 0.30) 0%,
+                              rgba(8, 20, 32, 0.58) 26%,
+                              rgba(8, 20, 32, 0.88) 48%,
+                              rgba(8, 20, 32, 0.94) 100%);
+  }
+}
+
+.band__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-block: clamp(var(--s-8), 5vw, var(--s-11));
+}
+
+.band__copy  { max-width: min(48ch, 100%); color: var(--c-on-navy); }
+.band__label { color: var(--c-cyan); }
+.band__title { color: var(--c-white); margin-block: var(--s-5) var(--s-5); }
+.band__text  { color: var(--c-on-navy-mute); margin-bottom: var(--s-7); text-wrap: pretty; }
+.band__link  { color: var(--c-cyan-bright); }
+
+/* The signature lockup, left-aligned where it opens a block rather
+   than centring one. */
+.lockup--left { justify-content: flex-start; }
+
+
+/* ============================================================
+   07 · LEADERSHIP
+   Trust comes from people, not projects. Equal-height,
+   portrait-led, identical structure: the published biographies
+   are severely unbalanced, so the design equalises them rather
+   than exposing the gap.
+   ============================================================ */
+
+.people { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--grid-gap); }
+
+.person { display: flex; flex-direction: column; min-width: 0; }
+
+.person__portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  margin-bottom: var(--s-5);
+  background: var(--c-navy-soft);
+  overflow: hidden;
+}
+.person__portrait img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.04);
+  transition: filter var(--d-slow) var(--ease);
+}
+.person:hover .person__portrait img { filter: grayscale(0.15) contrast(1.02); }
+
+/* Portraits pending. Until genuine photographs are supplied, the
+   slot is NOT a large dark tile with ghosted initials — four of those
+   in a row read as placeholders, which is exactly what they are. The
+   pending state is the business card's small cyan circle carrying the
+   initials instead: complete in its own right, and a quarter the
+   height. Supplying a portrait restores the 4:5 image slot above. */
+
+.person__portrait--pending {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  width: 4.5rem;
+  margin-bottom: var(--s-6);
+  background: none;
+  border: var(--hairline) solid var(--c-cyan-ink);
+  border-radius: var(--radius-pill);
+  overflow: visible;
+}
+.person__portrait--pending::after {
+  content: attr(data-initials);
+  font-family: var(--f-display);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.08em;
+  color: var(--c-cyan-ink);
+  margin-right: -0.08em;
+}
+
+.person__name { margin-bottom: var(--s-2); }
+.person__role {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--c-cyan-ink);
+  margin-bottom: var(--s-4);
+  padding-bottom: var(--s-4);
+  border-bottom: var(--hairline) solid var(--c-rule);
+}
+.person__text { font-size: var(--fs-sm); color: var(--c-ink-mute); text-wrap: pretty; }
+
+@media (max-width: 860px) { .people { grid-template-columns: 1fr; max-width: 26rem; } }
+
+
+/* ============================================================
+   08 · WHY FTR
+   ============================================================ */
+
+/* Headline left, argument right — the same split as the delivery
+   system and the Academy, so the three long-form sections share one
+   shape. Previously the left three columns held only a "Ref." label
+   the gate head already stated. */
+.why__head { grid-column: 1 / span 5; }
+.why__body { grid-column: 7 / span 6; }
+.why__head .h1 { color: var(--c-white); }
+.why__body .prose { color: var(--c-on-navy-mute); max-width: min(56ch, 100%); }
+
+@media (max-width: 900px) {
+  .why__head { grid-column: 1 / -1; margin-bottom: var(--s-7); }
+  .why__body { grid-column: 1 / -1; }
+}
+
+
+/* ============================================================
+   09 · FROM THE CLUSTER
+   Deliberately breaks the vertical rhythm of the page: a
+   horizontal rail, so the page ends with movement rather than
+   another stacked block. Scroll-snapped, keyboard reachable.
+   ============================================================ */
+
+.insights__lede { margin-bottom: var(--s-9); }
+
+.insights__rail {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--s-5);
+}
+
+.insights__track {
+  display: flex;
+  gap: var(--grid-gap);
+  /* Aligns the first card to the page gutter and lets the last card
+     scroll clear of the right edge. */
+  padding-inline: max(var(--gutter), calc((100vw - var(--page-max)) / 2 + var(--gutter)));
+  width: max-content;
+}
+
+.insight {
+  flex: 0 0 clamp(17rem, 24vw, 24rem);
+  scroll-snap-align: start;
+}
+
+/* Three cards and a wide viewport: a horizontal rail with nothing to
+   scroll to just left a short row and a stranded scrollbar. Above
+   900px the rail becomes a grid on the page measure; below it, it
+   stays a rail, which is the right behaviour on a phone. */
+@media (min-width: 901px) {
+  .insights__rail { overflow: visible; scroll-snap-type: none; padding-bottom: 0; }
+  .insights__track {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: auto;
+    max-width: var(--page-max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .insight { flex: initial; min-width: 0; }
+}
+
+.insight__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.insight__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  margin-bottom: var(--s-5);
+  overflow: hidden;
+  background: var(--c-navy);
+}
+.insight__media img { filter: grayscale(0.85) contrast(1.05); }
+.insight__media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Oversized index numeral, seated on the image. */
+.insight__index {
+  position: absolute;
+  z-index: 2;
+  left: var(--s-4);
+  bottom: var(--s-2);
+  font-family: var(--f-display);
+  font-size: clamp(2.5rem, 1.8rem + 2.6vw, 3.75rem);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  letter-spacing: var(--ls-h1);
+  color: var(--c-white);
+  opacity: 0.92;
+  font-variant-numeric: tabular-nums;
+}
+
+.insight__kind  { margin-bottom: var(--s-4); }
+/* Reserve three lines so the body copy starts on the same baseline
+   across all three cards, whatever the title length. */
+.insight__title {
+  margin-bottom: var(--s-4);
+  min-height: calc(3 * var(--lh-heading) * 1em);
+  text-wrap: pretty;
+}
+.insight__text  {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  margin-bottom: var(--s-6);
+  text-wrap: pretty;
+}
+
+.insight__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: auto;
+  align-self: flex-start;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--c-cyan-ink);
+  padding-bottom: var(--s-1);
+  border-bottom: var(--hairline) solid currentColor;
+  transition: gap var(--d-fast) var(--ease);
+}
+.insight__link:hover .insight__cta { gap: var(--s-4); }
+.insight__link:hover .insight__media img { transform: scale(1.04); }
+.insight__media img { transition: transform var(--d-slow) var(--ease); }
+
+
+/* ============================================================
+   10 · CONTACT CTA
+   ============================================================ */
+
+.cta { text-align: center; }
+.cta__title   { margin-inline: auto; margin-block: var(--s-5); max-width: min(18ch, 100%); }
+.cta__text    { margin-inline: auto; max-width: min(44ch, 100%); margin-bottom: var(--s-8); }
+.cta__actions { display: flex; justify-content: center; flex-wrap: wrap; gap: var(--s-4); }
+
+
+/* ============================================================
+   SHARED — arrow device, gates without JS
+   ============================================================ */
+
+/* The arrow from the mark replaces the generic glyph in links and
+   buttons. Sized against the cap height of the label beside it. */
+.link__arrow, .btn__arrow { width: 16px; height: auto; flex: none; }
+
+.btn__arrow { transition: transform var(--d-fast) var(--ease); }
+.btn:hover .btn__arrow { transform: translateX(3px); }
+
+/* Without the observer the gate rules would never draw and the page
+   would lose its organising device. Content is never gated on JS. */
+.no-js .gate__head::after,
+.no-js .commit::after { transform: scaleX(1); }
+
+/* ============================================================
+   03 · HOW WE ENGAGE — supporting copy
+   ============================================================ */
+
+.engage__lede { margin-bottom: var(--s-9); }
+
+/* No rule of its own: the services list already closes on a full-width
+   border, and a second half-width rule 48px below it read as an
+   accident rather than as structure. */
+.engage__note {
+  margin-top: var(--s-7);
+  max-width: min(64ch, 100%);
+  color: var(--c-ink-mute);
+  text-wrap: pretty;
+}
+
+
+/* ============================================================
+   04 · FTR ACADEMY
+   Skilling carries equal weight with construction and
+   commissioning, so it gets a full navy section of its own
+   rather than a service slot.
+   ============================================================ */
+
+.academy__head { grid-column: 1 / span 5; }
+.academy__body { grid-column: 7 / span 6; }
+
+.academy__head .h1 { color: var(--c-white); margin-block: var(--s-5) var(--s-6); }
+
+.academy__note {
+  padding-top: var(--s-6);
+  border-top: var(--hairline) solid var(--c-navy-line);
+  font-size: var(--fs-sm);
+  color: var(--c-on-navy-mute);
+  max-width: min(36ch, 100%);
+  text-wrap: pretty;
+}
+
+.academy__lede {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  color: var(--c-white);
+  margin-bottom: var(--s-8);
+  text-wrap: pretty;
+}
+
+/* Hub, spokes, cascade — a real three-step model, so it is numbered. */
+.acad { display: grid; gap: 0; }
+
+.acad__item {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  gap: var(--s-5);
+  padding-block: var(--s-6);
+  border-top: var(--hairline) solid var(--c-navy-line);
+}
+.acad__item:last-child { border-bottom: var(--hairline) solid var(--c-navy-line); }
+
+.acad__num {
+  font-family: var(--f-display);
+  font-size: var(--fs-gate);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-caps);
+  color: var(--c-cyan);
+  padding-top: 0.35em;
+}
+.acad__title { color: var(--c-white); margin-bottom: var(--s-3); }
+.acad__text  { font-size: var(--fs-sm); color: var(--c-on-navy-mute); text-wrap: pretty; }
+
+.academy__foot {
+  margin-top: var(--s-7);
+  font-size: var(--fs-sm);
+  color: var(--c-on-navy-mute);
+  max-width: min(60ch, 100%);
+  text-wrap: pretty;
+}
+
+@media (max-width: 900px) {
+  .academy__head { grid-column: 1 / -1; margin-bottom: var(--s-8); }
+  .academy__body { grid-column: 1 / -1; }
+}
+
+
+/* ============================================================
+   05 · THE STANDARD — ground
+   A deeper navy than the Academy section above it, so two navy
+   sections in sequence read as a tonal step rather than one slab.
+   ============================================================ */
+
+.standard { background: var(--c-navy-deep); }
+
+
+/* ============================================================
+   07 · LEADERSHIP — four directors
+   The decks name four founding directors, and the governance
+   claim (execution authority separated from commercial) only
+   reads if both authorities are on the page.
+   ============================================================ */
+
+.people { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 1100px) { .people { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px)  { .people { grid-template-columns: 1fr; max-width: 24rem; } }
+
+
+/* ============================================================
+   04 · THE DELIVERY SYSTEM — the six gates
+   The organising idea of the whole site, finally shown as the
+   documented sequence it comes from rather than implied.
+   ============================================================ */
+
+.system__head { grid-column: 1 / span 5; }
+.gates        { grid-column: 7 / span 6; }
+
+.system__note {
+  margin-top: var(--s-6);
+  color: var(--c-ink-mute);
+  max-width: min(38ch, 100%);
+  text-wrap: pretty;
+}
+
+.gateway {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  gap: var(--s-5);
+  padding-block: var(--s-5);
+  border-top: var(--hairline) solid var(--c-rule);
+}
+.gateway:last-child { border-bottom: var(--hairline) solid var(--c-rule); }
+
+.gateway__num {
+  font-family: var(--f-display);
+  font-size: var(--fs-gate);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-caps);
+  color: var(--c-cyan-ink);
+  padding-top: 0.35em;
+}
+.gateway__title { margin-bottom: var(--s-2); }
+.gateway__text  { font-size: var(--fs-sm); color: var(--c-ink-mute); text-wrap: pretty; }
+
+@media (max-width: 900px) {
+  .system__head { grid-column: 1 / -1; margin-bottom: var(--s-8); }
+  .gates        { grid-column: 1 / -1; }
+}
+
+
+/* ============================================================
+   08 · THE TEAM WE FIELD
+   Six senior roles, then the three pools they come from. The
+   roles are a flat set, so they are not numbered.
+   ============================================================ */
+
+.team__lede { margin-bottom: var(--s-9); }
+
+.roles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+.role {
+  min-width: 0;
+  padding: var(--s-6) var(--s-7) var(--s-7) 0;
+  border-top: var(--hairline) solid var(--c-rule);
+}
+.role__title { margin-bottom: var(--s-3); }
+.role__text  { font-size: var(--fs-sm); color: var(--c-ink-mute); text-wrap: pretty; }
+
+@media (max-width: 860px) { .roles { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .roles { grid-template-columns: 1fr; } .role { padding-right: 0; } }
+
+/* Three pools. Previously a grey tinted card — the one boxed element
+   on the page, and the stock "feature block" look. Now it follows the
+   page's own grammar: label left, content right, cyan-ruled columns. */
+.pools {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  margin-top: var(--s-10);
+}
+.pools__label { grid-column: 1 / span 3; padding-top: var(--s-5); }
+
+.pools__grid {
+  grid-column: 4 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+.pool { min-width: 0; padding-top: var(--s-5); border-top: var(--rule-accent) solid var(--c-cyan); }
+.pool__name { font-size: var(--fs-h3); font-weight: var(--fw-medium); letter-spacing: var(--ls-h3); margin-bottom: var(--s-3); }
+.pool__text { font-size: var(--fs-sm); color: var(--c-ink-mute); text-wrap: pretty; }
+
+@media (max-width: 900px) {
+  .pools__label, .pools__grid { grid-column: 1 / -1; }
+  .pools__label { padding-top: 0; }
+}
+@media (max-width: 760px) { .pools__grid { grid-template-columns: 1fr; gap: var(--s-7); } }
+
+/* ============================================================
+   Section links and counting numerals
+   ============================================================ */
+
+/* Each homepage section closes with one text link into its own
+   page. This is what keeps the site reading as a multi-page site
+   rather than a single scrolling page. */
+.section__link { margin-top: var(--s-8); }
+.on-navy .section__link { color: var(--c-cyan-bright); }
+
+/* Counters animate from zero. Every value is padded to two digits
+   and the parent sets tabular figures, so the glyph box never
+   changes width and the count costs nothing in layout shift. */
+.count {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ============================================================
+   RELEASE — the ruled lists
+   Every ruled row on the page carries the same cyan draw as the
+   commitments, released in sequence when its section is reached.
+   One gesture, used everywhere, is what separates a designed page
+   from an assembled one.
+   ============================================================ */
+
+.fact, .gateway, .acad__item, .role, .pool { position: relative; }
+
+.fact::before,
+.gateway::before,
+.acad__item::before,
+.role::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: -1px;
+  height: var(--hairline);
+  background: var(--c-cyan);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--d-release) var(--ease);
+  transition-delay: var(--row-delay, 0ms);
+}
+.gate.is-released .fact::before,
+.gate.is-released .gateway::before,
+.gate.is-released .acad__item::before,
+.gate.is-released .role::before { transform: scaleX(1); }
+
+/* On navy the rule is the brighter cyan, as it is on the gate heads. */
+.on-navy .acad__item::before { background: var(--c-cyan); }
+
+/* The sequence. Staggered by position, not by when each row happens
+   to cross the viewport — choreography, not coincidence. */
+.fact:nth-child(1),  .gateway:nth-child(1),  .acad__item:nth-child(1), .role:nth-child(1) { --row-delay:   0ms; }
+.fact:nth-child(2),  .gateway:nth-child(2),  .acad__item:nth-child(2), .role:nth-child(2) { --row-delay:  90ms; }
+.fact:nth-child(3),  .gateway:nth-child(3),  .acad__item:nth-child(3), .role:nth-child(3) { --row-delay: 180ms; }
+.fact:nth-child(4),  .gateway:nth-child(4),                            .role:nth-child(4) { --row-delay: 270ms; }
+.gateway:nth-child(5),                                                 .role:nth-child(5) { --row-delay: 360ms; }
+.gateway:nth-child(6),                                                 .role:nth-child(6) { --row-delay: 450ms; }
+
+.no-js .fact::before,
+.no-js .gateway::before,
+.no-js .acad__item::before,
+.no-js .role::before { transform: scaleX(1); }
+
+/* ============================================================
+   06 · SECTORS — visual panels
+   An intro panel carrying the shared-discipline argument, then one
+   tall photographic panel per sector. Square geometry, hairline
+   dividers, and the release vocabulary: the imagery is uncovered in
+   sequence, and hovering a panel draws its rule and lifts the grade.
+   Panel widths never animate — a sliding accordion reflows the row
+   and reads as a slider plugin.
+   ============================================================ */
+
+.sectors {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 3fr);
+  min-height: clamp(34rem, 24rem + 20vw, 46rem);
+  background: var(--c-navy);
+  color: var(--c-on-navy);
+}
+
+/* --- Intro panel --- */
+
+.sectors__intro {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(var(--s-6), 3vw, var(--s-9));
+}
+
+.sectors__head { display: flex; align-items: center; gap: var(--s-4); margin-bottom: var(--s-8); }
+.sectors__head .gate__num { color: var(--c-cyan); }
+.sectors__head .label { color: var(--c-on-navy-mute); }
+.sectors__rule {
+  width: 2.5rem; height: var(--hairline);
+  background: var(--c-cyan);
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform var(--d-release) var(--ease);
+}
+.gate.is-released .sectors__rule, .no-js .sectors__rule { transform: scaleX(1); }
+
+.sectors__title {
+  font-size: clamp(2.25rem, 1.5rem + 2vw, 3.5rem);
+  color: var(--c-white);
+  margin-bottom: var(--s-6);
+}
+
+.sectors__text {
+  color: var(--c-on-navy-mute);
+  max-width: min(34ch, 100%);
+  margin-bottom: var(--s-7);
+  text-wrap: pretty;
+}
+
+/* The circular mark from the business card, carrying the arrow from
+   the logo. Shared by the intro link and every panel. */
+.circle {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 2.75rem; height: 2.75rem;
+  border: var(--hairline) solid rgba(46, 216, 255, 0.45);
+  border-radius: var(--radius-pill);
+  transition: border-color var(--d-base) var(--ease),
+              background   var(--d-base) var(--ease);
+}
+.circle img { width: 16px; height: auto; transition: transform var(--d-base) var(--ease); }
+
+.sectors__all {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-4);
+  align-self: flex-start;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--c-white);
+  text-decoration: none;
+}
+.sectors__all:hover .circle,
+.sector__link:hover .circle,
+.sector__link:focus-visible .circle { border-color: var(--c-cyan); background: rgba(0, 180, 230, 0.16); }
+.sectors__all:hover .circle img,
+.sector__link:hover .circle img { transform: translateX(3px); }
+
+.sectors__disciplines {
+  margin-top: auto;
+  padding-top: var(--s-8);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label);
+  line-height: 2;
+  text-transform: uppercase;
+  color: var(--c-on-navy-mute);
+}
+.sectors__disciplines::before {
+  content: "";
+  display: block;
+  width: 2rem; height: var(--rule-accent);
+  background: var(--c-cyan);
+  margin-bottom: var(--s-5);
+}
+
+/* --- Photographic panels --- */
+
+.sectors__panels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sector { position: relative; min-width: 0; border-left: var(--hairline) solid rgba(255, 255, 255, 0.10); }
+
+.sector__link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: clamp(var(--s-5), 2.2vw, var(--s-7));
+  color: var(--c-white);
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.sector__media { position: absolute; inset: 0; }
+.sector__media img {
+  filter: grayscale(0.45) contrast(1.06);
+  transition: clip-path var(--d-wipe) var(--ease) var(--panel-delay, 0ms),
+              transform var(--d-slow) var(--ease),
+              filter    var(--d-slow) var(--ease);
+}
+.sector:nth-child(2) { --panel-delay: 140ms; }
+.sector:nth-child(3) { --panel-delay: 280ms; }
+.sector:nth-child(2) .sector__title { --wipe-delay: 140ms; }
+.sector:nth-child(3) .sector__title { --wipe-delay: 280ms; }
+
+.sector__link:hover .sector__media img,
+.sector__link:focus-visible .sector__media img { transform: scale(1.04); filter: grayscale(0.05) contrast(1.04); }
+
+/* Type sits on the dark ends of the veil; the middle of the
+   photograph stays open. */
+.sector__media::after {
+  mix-blend-mode: normal;
+  background: linear-gradient(180deg,
+    rgba(8, 20, 32, 0.86) 0%,
+    rgba(8, 20, 32, 0.30) 32%,
+    rgba(8, 20, 32, 0.22) 50%,
+    rgba(8, 20, 32, 0.92) 100%);
+}
+
+/* The release: a cyan rule draws across the top of the panel. */
+.sector__link::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0; top: 0;
+  z-index: 3;
+  height: var(--rule-accent);
+  background: var(--c-cyan);
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform var(--d-base) var(--ease);
+}
+.sector__link:hover::before,
+.sector__link:focus-visible::before { transform: scaleX(1); }
+
+.sector__top, .sector__foot { position: relative; z-index: 2; }
+
+.sector__num { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-5); }
+.sector__num .gate__num { color: var(--c-cyan-bright); }
+.sector__tick { width: 1.5rem; height: var(--hairline); background: rgba(255, 255, 255, 0.5); }
+
+.sector__title {
+  font-family: var(--f-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-h3);
+  line-height: var(--lh-heading);
+}
+
+.sector__foot { display: flex; align-items: flex-end; gap: var(--s-5); }
+.sector__desc {
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--c-on-navy);
+  text-wrap: pretty;
+}
+
+/* --- Responsive --- */
+
+@media (max-width: 1100px) {
+  .sectors { grid-template-columns: 1fr; min-height: 0; }
+  .sectors__disciplines {
+    display: flex; flex-wrap: wrap; gap: 0 var(--s-5);
+    padding-top: var(--s-7); line-height: 2;
+  }
+  /* Full-basis to force the line break, painted only 2rem wide so it
+     stays the short accent rule rather than a divider. */
+  .sectors__disciplines::before {
+    flex-basis: 100%;
+    background: linear-gradient(var(--c-cyan), var(--c-cyan)) left center / 2rem 100% no-repeat;
+  }
+  .sectors__panels { min-height: clamp(28rem, 20rem + 20vw, 34rem); }
+  .sector__foot { flex-direction: column; align-items: flex-start; }
+}
+/* Shorter panels put the description higher up the photograph, so the
+   veil closes earlier beneath it. */
+@media (max-width: 1100px) {
+  .sector__media::after {
+    background: linear-gradient(180deg,
+      rgba(8, 20, 32, 0.86) 0%,
+      rgba(8, 20, 32, 0.35) 28%,
+      rgba(8, 20, 32, 0.78) 58%,
+      rgba(8, 20, 32, 0.95) 100%);
+  }
+}
+@media (max-width: 760px) {
+  .sectors__panels { grid-template-columns: 1fr; min-height: 0; }
+  .sector { border-left: none; border-top: var(--hairline) solid rgba(255, 255, 255, 0.10); }
+  .sector__link { min-height: 26rem; }
+  .sector__foot { flex-direction: row; align-items: flex-end; }
+}
+
+/* Sectors carries its own dark ground, a step deeper than the card, so
+   the section reads as a dark beat in the page rhythm rather than a
+   dark card floating on a light page. */
+.sectors-section { background: var(--c-navy-deep); }
+.sectors-section .sectors { box-shadow: 0 0 0 var(--hairline) var(--c-navy-line); }
