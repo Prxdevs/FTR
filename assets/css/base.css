@@ -68,7 +68,7 @@ table, .u-tnum, .gate__num, .metric__value {
   top: -100%;
   z-index: var(--z-skip);
   padding: var(--s-3) var(--s-5);
-  background: var(--c-navy);
+  background: var(--c-graphite);
   color: var(--c-white);
   font-size: var(--fs-sm);
   text-decoration: none;
@@ -99,7 +99,7 @@ table, .u-tnum, .gate__num, .metric__value {
   font-size: var(--fs-lead);
   line-height: var(--lh-lead);
   max-width: var(--measure-lead);
-  color: var(--c-ink-mute);
+  color: var(--c-text);
   text-wrap: pretty;
 }
 
@@ -122,7 +122,7 @@ table, .u-tnum, .gate__num, .metric__value {
   line-height: var(--lh-label);
   letter-spacing: var(--ls-label);
   text-transform: uppercase;
-  color: var(--c-ink-faint);
+  color: var(--c-label);
 }
 
 /* The business-card signature lockup. Letterspacing is fixed by
@@ -137,7 +137,7 @@ table, .u-tnum, .gate__num, .metric__value {
 .lockup__rule {
   flex: 0 0 clamp(1.5rem, 4vw, 3rem);
   height: var(--hairline);
-  background: var(--c-cyan);
+  background: var(--c-accent);
 }
 .lockup__text {
   font-family: var(--f-body);
@@ -145,7 +145,7 @@ table, .u-tnum, .gate__num, .metric__value {
   font-weight: var(--fw-medium);
   letter-spacing: var(--ls-lockup);
   text-transform: uppercase;
-  color: var(--c-cyan);
+  color: var(--c-accent);
   margin-right: calc(var(--ls-lockup) * -1);
   white-space: nowrap;
 }
@@ -159,7 +159,7 @@ a { color: inherit; }
   display: inline-flex;
   align-items: center;
   gap: var(--s-3);
-  color: var(--c-cyan-ink);
+  color: var(--c-accent-ink);
   font-weight: var(--fw-medium);
   text-decoration: none;
   padding-bottom: var(--s-1);
@@ -170,7 +170,7 @@ a { color: inherit; }
 .link__arrow { transition: transform var(--d-fast) var(--ease); }
 .link:hover .link__arrow { transform: translateX(3px); }
 
-.on-navy .link { color: var(--c-cyan-bright); }
+.on-navy .link { color: var(--c-accent-bright); }
 
 /* --- BUTTONS -------------------------------------------------- */
 
@@ -193,20 +193,20 @@ a { color: inherit; }
 }
 
 .btn--primary {
-  background: var(--c-cyan);
-  color: var(--c-navy);
+  background: var(--c-accent);
+  color: var(--c-graphite);
   font-weight: var(--fw-semibold);
 }
-.btn--primary:hover { background: var(--c-cyan-bright); }
+.btn--primary:hover { background: var(--c-accent-bright); }
 
 .btn--ghost {
   background: transparent;
   color: var(--c-on-navy);
-  border-color: var(--c-navy-line);
+  border-color: var(--c-graphite-line);
 }
 .btn--ghost:hover {
-  border-color: var(--c-cyan);
-  color: var(--c-cyan-bright);
+  border-color: var(--c-accent);
+  color: var(--c-accent-bright);
 }
 
 .btn--outline {
@@ -215,6 +215,14 @@ a { color: inherit; }
   border-color: var(--c-rule);
 }
 .btn--outline:hover { border-color: var(--c-ink); }
+
+/* --- CLOSING CTA -----------------------------------------------
+   Shared by every page: each one ends on the same invitation. */
+
+.cta { text-align: center; }
+.cta__title   { margin-inline: auto; margin-block: var(--s-5); max-width: min(18ch, 100%); }
+.cta__text    { margin-inline: auto; max-width: min(44ch, 100%); margin-bottom: var(--s-8); }
+.cta__actions { display: flex; justify-content: center; flex-wrap: wrap; gap: var(--s-4); }
 
 /* --- LAYOUT --------------------------------------------------- */
 
@@ -230,10 +238,10 @@ a { color: inherit; }
 
 /* Surfaces */
 .on-navy {
-  background: var(--c-navy);
+  background: var(--c-graphite);
   color: var(--c-on-navy);
 }
-.on-navy .label        { color: var(--c-cyan); }
+.on-navy .label        { color: var(--c-accent); }
 .on-navy .lead         { color: var(--c-on-navy-mute); }
 .on-navy .prose strong { color: var(--c-white); }
 
@@ -264,8 +272,8 @@ a { color: inherit; }
   display: flex;
   align-items: baseline;
   gap: var(--s-5);
-  padding-bottom: var(--s-5);
-  margin-bottom: var(--s-8);
+  padding-bottom: var(--s-3);
+  margin-bottom: var(--s-6);
   position: relative;
 }
 
@@ -275,9 +283,9 @@ a { color: inherit; }
   font-size: var(--fs-gate);
   font-weight: var(--fw-medium);
   letter-spacing: var(--ls-caps);
-  color: var(--c-cyan-ink);
+  color: var(--c-accent-ink);
 }
-.on-navy .gate__num { color: var(--c-cyan); }
+.on-navy .gate__num { color: var(--c-accent); }
 
 .gate__status {
   margin-left: auto;
@@ -295,11 +303,12 @@ a { color: inherit; }
   inset-inline: 0;
   bottom: 0;
   height: var(--hairline);
-  background: var(--c-cyan);
+  background: linear-gradient(90deg, var(--c-accent) 0 4rem, var(--c-rule) 4rem);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform var(--d-release) var(--ease);
 }
+.on-navy .gate__head::after { background: linear-gradient(90deg, var(--c-accent) 0 4rem, var(--c-graphite-line) 4rem); }
 .gate.is-released .gate__head::after { transform: scaleX(1); }
 
 /* The spine — a hairline running the height of the page body,
@@ -308,7 +317,59 @@ a { color: inherit; }
 /* The spine is a component: home.css positions it and paints its
    rule, fill and arrow. Nothing is declared here beyond the reset
    the container needs. */
-.spine { background: none; pointer-events: none; }
+/* The live site's spine: a fine rule down the left edge carrying the arrow
+   from the FTR mark. --progress (0-1) is written on :root by main.js. */
+.spine {
+  position: fixed;
+  left: var(--spine-inset);
+  top: 18vh;
+  bottom: 18vh;
+  width: 2rem;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.spine__rule,
+.spine__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--spine-width);
+}
+.spine__rule { bottom: 0; background: var(--c-rule); }
+
+.spine__fill {
+  height: 100%;
+  background: linear-gradient(180deg, var(--c-accent-deep), var(--c-accent-bright));
+  transform: scaleY(var(--progress, 0));
+  transform-origin: top center;
+}
+
+/* The arrow rides the leading edge of the fill, marking how far
+   through the programme the reader has got.
+
+   It is NOT rotated. The arrow in the FTR mark rises to the right —
+   that gesture is the brand. Turning it to point downwards inverts
+   the meaning, and rotating a locked mark is a modification of it.
+   So the marker travels down the rule while the mark itself stays
+   in its true orientation, pointing forward into the page. */
+.spine__arrow {
+  position: absolute;
+  left: 0;
+  top: calc(var(--progress, 0) * 100%);
+  width: 30px;
+  height: auto;
+  transform: translate(-30%, -55%);
+  filter: drop-shadow(0 1px 3px color-mix(in srgb, var(--c-graphite-deep) 35%, transparent));
+}
+
+/* Below 1100px the page is too narrow to carry the spine without
+   crowding the measure. */
+@media (max-width: 1100px) { .spine { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .spine__fill, .spine__arrow { transition: none; }
+}
 
 /* --- MOTION ----------------------------------------------------
    One idea governs every entrance on this site: things are
@@ -341,11 +402,12 @@ a { color: inherit; }
    VISIBLE area, so an element collapsed by its own clip-path reports
    a ratio of zero, never intersects, and would stay hidden for good. */
 .wipe {
-  clip-path: inset(0 100% 0 0);
+  /* Bottom and left insets overshoot so descenders (the g in Right) are never cut. */
+  clip-path: inset(-0.1em 100% -0.3em -0.05em);
   transition: clip-path var(--d-wipe) var(--ease);
   transition-delay: var(--wipe-delay, 0ms);
 }
-.is-in .wipe { clip-path: inset(0 0 0 0); }
+.is-in .wipe { clip-path: inset(-0.1em -0.1em -0.3em -0.05em); }
 
 /* No-JS safety: content is never gated on the observer running. */
 .no-js .reveal { opacity: 1; }
@@ -367,7 +429,7 @@ a { color: inherit; }
 .figure {
   position: relative;
   overflow: hidden;
-  background: var(--c-navy);
+  background: var(--c-graphite);
 }
 
 /* The photograph is uncovered by the same moving edge as the type,
@@ -391,8 +453,8 @@ a { color: inherit; }
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(13, 27, 42, 0.42) 0%,
-    var(--veil-navy) 100%
+    color-mix(in srgb, var(--c-graphite) 42%, transparent) 0%,
+    var(--veil-graphite) 100%
   );
   mix-blend-mode: multiply;
   pointer-events: none;
@@ -405,15 +467,43 @@ a { color: inherit; }
   inset-inline: 0;
   top: 0;
   z-index: var(--z-header);
-  transition: background var(--d-base) var(--ease),
-              border     var(--d-base) var(--ease);
+  transition: border var(--d-base) var(--ease);
   border-bottom: var(--hairline) solid transparent;
 }
-.header.is-stuck {
-  background: rgba(13, 27, 42, 0.92);
-  backdrop-filter: saturate(140%) blur(10px);
-  border-bottom-color: var(--c-navy-line);
+.header.is-stuck { border-bottom-color: var(--c-graphite-line); }
+
+/* The blurred navy backdrop lives on a layer behind the bar's own
+   content, not on .header itself: backdrop-filter on .header would
+   make it the containing block for the fixed-position nav drawer
+   nested inside it, confining the drawer to the header's own ~5rem
+   strip instead of the viewport. */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: transparent;
+  transition: background var(--d-base) var(--ease);
 }
+.header.is-stuck::before {
+  background: color-mix(in srgb, var(--c-graphite) 97%, transparent);
+}
+
+/* Reading rule: a cyan hairline along the stuck header's foot that
+   draws across as the page is read (--progress, written by main.js). */
+.header::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: calc(var(--hairline) * -1);
+  height: var(--rule-accent);
+  background: var(--c-accent);
+  transform: scaleX(var(--progress, 0));
+  transform-origin: left center;
+  opacity: 0;
+  transition: opacity var(--d-base) var(--ease);
+}
+.header.is-stuck::after { opacity: 1; }
 
 .header__bar {
   display: flex;
@@ -421,7 +511,10 @@ a { color: inherit; }
   justify-content: space-between;
   gap: var(--s-6);
   height: clamp(4.25rem, 3.6rem + 2.6vw, 5.5rem);
+  transition: height var(--d-base) var(--ease);
 }
+/* Once stuck, the bar tightens so it takes less of the reading area. */
+.header.is-stuck .header__bar { height: var(--s-9); }
 
 /* Generous clear space, with extra room to the right for the
    arrow tail on the R. Brief, Part 4. */
@@ -430,7 +523,8 @@ a { color: inherit; }
   flex: none;
   padding-right: var(--s-4);
 }
-.header__logo img { height: clamp(1.75rem, 1.45rem + 1.2vw, 2.5rem); width: auto; }
+.header__logo img { height: clamp(1.75rem, 1.45rem + 1.2vw, 2.5rem); width: auto; transition: height var(--d-base) var(--ease); }
+.header.is-stuck .header__logo img { height: var(--s-6); }
 
 /* --- Nav trigger ------------------------------------------------
    Three bars open the drawer at every viewport. The drawer carries
@@ -448,7 +542,7 @@ a { color: inherit; }
   cursor: pointer;
   transition: color var(--d-fast) var(--ease);
 }
-.nav__toggle:hover { color: var(--c-cyan-bright); }
+.nav__toggle:hover { color: var(--c-accent-bright); }
 
 .nav__toggle-bars {
   position: relative;
@@ -474,7 +568,7 @@ a { color: inherit; }
   position: fixed;
   inset: 0;
   z-index: var(--z-menu);
-  background: rgba(5, 12, 20, 0.62);
+  background: color-mix(in srgb, var(--c-graphite-deep) 62%, transparent);
   backdrop-filter: blur(3px);
   opacity: 0;
   visibility: hidden;
@@ -500,14 +594,22 @@ a { color: inherit; }
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
-  background: var(--c-navy-deep);
-  border-left: var(--hairline) solid var(--c-navy-line);
+  background: var(--c-graphite-deep);
+  border-left: var(--hairline) solid var(--c-graphite-line);
   transform: translateX(100%);
   visibility: hidden;
   transition: transform  var(--d-slow) var(--ease),
               visibility var(--d-slow) var(--ease);
 }
-.nav.is-open { transform: none; visibility: visible; }
+/* Opening flips visibility at once (0s) and only the slide is timed, so
+   the drawer is focusable in the same tick it opens. Closing keeps the
+   delayed visibility above, so the panel stays visible while it leaves. */
+.nav.is-open {
+  transform: none;
+  visibility: visible;
+  transition: transform var(--d-slow) var(--ease),
+              visibility 0s;
+}
 
 /* Ghosted mark from the business card. Supplied artwork, opacity only. */
 .nav::after {
@@ -543,7 +645,7 @@ a { color: inherit; }
   cursor: pointer;
   transition: color var(--d-fast) var(--ease);
 }
-.nav__close:hover { color: var(--c-cyan-bright); }
+.nav__close:hover { color: var(--c-accent-bright); }
 .nav__close-x::before,
 .nav__close-x::after {
   content: "";
@@ -581,7 +683,7 @@ a { color: inherit; }
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: var(--hairline) solid var(--c-navy-line);
+  border-top: var(--hairline) solid var(--c-graphite-line);
 }
 
 /* Each row owns its bottom rule: a static hairline that draws in on
@@ -593,6 +695,14 @@ a { color: inherit; }
   transition: opacity var(--d-base) var(--ease),
               transform var(--d-base) var(--ease);
 }
+/* Stagger index. Set here rather than inline: the CSP allows no inline
+   styles, and a style attribute would be silently dropped at the edge. */
+.nav__item:nth-child(1) { --i: 0; }
+.nav__item:nth-child(2) { --i: 1; }
+.nav__item:nth-child(3) { --i: 2; }
+.nav__item:nth-child(4) { --i: 3; }
+.nav__item:nth-child(5) { --i: 4; }
+
 .nav__item::before,
 .nav__item::after {
   content: "";
@@ -604,11 +714,11 @@ a { color: inherit; }
   transform-origin: left;
 }
 .nav__item::before {
-  background: var(--c-navy-line);
+  background: var(--c-graphite-line);
   transition: transform var(--d-slow) var(--ease);
 }
 .nav__item::after {
-  background: var(--c-cyan);
+  background: var(--c-accent);
   transition: transform var(--d-base) var(--ease);
 }
 .nav.is-open .nav__item {
@@ -639,7 +749,7 @@ a { color: inherit; }
 }
 .nav__name {
   font-family: var(--f-display);
-  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  font-size: var(--fs-card);
   font-weight: var(--fw-medium);
   letter-spacing: -0.01em;
   transition: transform var(--d-base) var(--ease),
@@ -655,7 +765,7 @@ a { color: inherit; }
 }
 
 .nav__link:hover .nav__num,
-.nav__link:focus-visible .nav__num { color: var(--c-cyan); }
+.nav__link:focus-visible .nav__num { color: var(--c-accent); }
 .nav__link:hover .nav__name,
 .nav__link:focus-visible .nav__name { transform: translateX(6px); color: var(--c-white); }
 .nav__link:hover .nav__arrow,
@@ -664,7 +774,7 @@ a { color: inherit; }
 .nav__item:focus-within::after { transform: scaleX(1); }
 
 .nav__link[aria-current="page"] .nav__num,
-.nav__link[aria-current="page"] .nav__name { color: var(--c-cyan-bright); }
+.nav__link[aria-current="page"] .nav__name { color: var(--c-accent-bright); }
 .nav__item:has([aria-current="page"])::after { transform: scaleX(1); }
 
 .nav__foot {
@@ -689,7 +799,7 @@ a { color: inherit; }
 .footer {
   position: relative;
   overflow: hidden;
-  background: var(--c-navy-deep);
+  background: var(--c-graphite-deep);
   color: var(--c-on-navy);
   padding-block: var(--s-11) var(--s-7);
 }
@@ -734,7 +844,7 @@ a { color: inherit; }
   font-size: var(--fs-label);
   letter-spacing: var(--ls-label);
   text-transform: uppercase;
-  color: var(--c-cyan);
+  color: var(--c-accent);
   margin-bottom: var(--s-5);
 }
 .footer__list { font-size: var(--fs-sm); }
@@ -749,7 +859,7 @@ a { color: inherit; }
   .footer__issue { margin-left: 0; }
 }
 .footer a { color: var(--c-on-navy-mute); text-decoration: none; }
-.footer a:hover { color: var(--c-cyan-bright); }
+.footer a:hover { color: var(--c-accent-bright); }
 
 .footer__lockup { padding-block: var(--s-9) var(--s-8); }
 
@@ -758,7 +868,7 @@ a { color: inherit; }
   flex-wrap: wrap;
   gap: var(--s-4) var(--s-7);
   padding-top: var(--s-6);
-  border-top: var(--hairline) solid var(--c-navy-line);
+  border-top: var(--hairline) solid var(--c-graphite-line);
   font-size: var(--fs-xs);
   color: var(--c-on-navy-mute);
 }
@@ -805,3 +915,811 @@ a { color: inherit; }
 @media (max-width: 520px) {
   .btn { padding-inline: var(--s-5); font-size: var(--fs-xs); }
 }
+
+/* ============================================================
+   INNER-PAGE PRIMITIVES
+   Shared by About, Services and the Markets pages: the hero, the
+   split head/body layout, and the closing note.
+   ============================================================ */
+
+/* --- Page hero ---
+   No project photography exists, so authority comes from type:
+   a large statement, the ghosted mark, and an index strip that
+   doubles as in-page navigation.
+   ============================================================ */
+
+.phero {
+  position: relative;
+  min-height: min(100svh, 56rem);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  background: var(--c-graphite);
+  color: var(--c-on-navy);
+  overflow: hidden;
+}
+
+.phero__mark {
+  position: absolute;
+  right: -8%;
+  top: 46%;
+  width: min(78%, 70rem);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.phero__mark img {
+  width: 100%;
+  height: auto;
+  opacity: 0.06;   /* logo used as-is; opacity is the only treatment */
+}
+
+.phero__inner {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  align-self: end;
+  padding-block: calc(var(--s-12) + 3rem) var(--s-9);
+}
+
+.phero__label { color: var(--c-accent); margin-bottom: var(--s-6); }
+.phero__title { color: var(--c-white); margin-bottom: var(--s-6); }
+.phero__lede {
+  max-width: min(46ch, 100%);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  color: var(--c-on-navy-mute);
+  text-wrap: pretty;
+}
+
+/* Same release as the home hero, run once on load (main.js sets
+   .is-in on the hero directly). Each line holds a beat longer than
+   the one above it. */
+.phero__label { --reveal-delay: 0ms; }
+.phero__title { --wipe-delay: calc(var(--stagger) * 2); }
+.phero__lede  { --reveal-delay: calc(var(--stagger) * 7); }
+.phero__strip { --reveal-delay: calc(var(--stagger) * 10); }
+.phero.is-in .reveal { opacity: 1; }
+
+
+/* A shorter hero for pages that carry a sticky index straight after it. */
+.phero--short { min-height: min(72svh, 42rem); }
+
+/* ============================================================
+   SHARED SECTION LAYOUT
+   Head on the left, body on the right. Collapses to one column.
+   ============================================================ */
+
+.split__head { grid-column: 1 / span 5; min-width: 0; }
+.split__body { grid-column: 7 / span 6; min-width: 0; }
+.split__lede { margin-top: var(--s-6); }
+
+@media (max-width: 900px) {
+  .split__head { grid-column: 1 / -1; }
+  .split__body { grid-column: 1 / -1; }
+}
+
+/* A statement set under a section: label on the left, text on the
+   right, opened by a thin cyan rule. */
+.note {
+  margin-top: var(--s-10);
+  padding-top: var(--s-7);
+  border-top: var(--hairline) solid var(--c-accent);
+}
+.note__label { grid-column: 1 / span 5; min-width: 0; }
+.note__body  { grid-column: 7 / span 6; min-width: 0; font-size: var(--fs-lead); line-height: var(--lh-lead); }
+.note__links { margin-top: var(--s-5); display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-6); font-size: var(--fs-body); }
+
+@media (max-width: 900px) {
+  .note__label { grid-column: 1 / -1; margin-bottom: var(--s-4); }
+  .note__body  { grid-column: 1 / -1; }
+}
+
+
+/* ============================================================
+   SHARED VISUAL PRIMITIVES
+   Facts (counted stats), the full-bleed image band, and the
+   counting-numeral mechanic. Built for the homepage; reused on
+   About, Services and the Markets pages so they carry the same
+   photography and evidence devices rather than reading as a
+   plainer, later tier of the same site.
+   ============================================================ */
+
+/* --- Facts. Numbers, not adjectives. --- */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: var(--s-10);
+}
+
+.fact {
+  min-width: 0;
+  padding: var(--s-6) var(--s-6) 0 0;
+  border-top: var(--hairline) solid var(--c-rule);
+}
+.fact + .fact { padding-left: var(--s-6); }
+
+.fact__label {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--c-ink-faint);
+  margin-bottom: var(--s-4);
+}
+
+.fact__value {
+  font-family: var(--f-display);
+  font-size: var(--fs-stat);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  letter-spacing: var(--ls-h1);
+  color: var(--c-graphite);
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 var(--s-4);
+}
+.fact__value--text { font-size: var(--fs-stat-sm); }
+
+.fact__unit {
+  font-size: 0.4em;
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--c-accent-ink);
+  margin-left: 0.3em;
+  vertical-align: 0.9em;
+}
+
+.fact__note {
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--c-ink-mute);
+  text-wrap: pretty;
+}
+
+@media (max-width: 900px) { .facts { grid-template-columns: repeat(2, 1fr); row-gap: var(--s-6); } }
+@media (max-width: 460px) { .facts { grid-template-columns: 1fr; } .fact + .fact { padding-left: 0; } }
+
+/* Each row draws its own top rule, cyan, left to right, when the
+   enclosing gate is released — the same gesture as every other
+   ruled row on the site (home.css carries the rest: .gateway,
+   .acad__item, .role, .pool). */
+.fact { position: relative; }
+.fact::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: -1px;
+  height: var(--hairline);
+  background: var(--c-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--d-release) var(--ease);
+  transition-delay: var(--row-delay, 0ms);
+}
+.gate.is-released .fact::before,
+.standard.is-released .fact::before { transform: scaleX(1); }
+.fact:nth-child(1) { --row-delay:   0ms; }
+.fact:nth-child(2) { --row-delay:  90ms; }
+.fact:nth-child(3) { --row-delay: 180ms; }
+.fact:nth-child(4) { --row-delay: 270ms; }
+.no-js .fact::before { transform: scaleX(1); }
+
+
+/* ============================================================
+   SECTION BREAK · IMAGE BAND
+   The page is deliberately light on photography, so the few
+   images present are large and calm. No caption, no heading.
+   ============================================================ */
+
+/* Exyte's full-bleed image block: photograph, heading, one paragraph,
+   one text link. Previously this was an 82%-opaque slab carrying a
+   single letterspaced line — the picture never actually read, and the
+   page went six sections between images. Both are fixed here. */
+.band {
+  position: relative;
+  display: grid;
+  align-items: end;
+  min-height: clamp(26rem, 19rem + 27vw, 40rem);
+  background: var(--c-graphite);
+  overflow: hidden;
+}
+.band--tall { min-height: clamp(29rem, 21rem + 31vw, 45rem); }
+
+.band__media { position: absolute; inset: 0; }
+.band__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.72) contrast(1.08);
+}
+
+/* An open-sky exterior shot stays too bright for the standard scrim
+   even at full opacity: white type loses contrast against pale grey
+   sky where the darkening gradient is weakest. Darkened at the
+   source instead of strengthening the shared gradient every band
+   relies on. */
+.band__media--dim img { filter: grayscale(0.72) contrast(1.1) brightness(0.62); }
+
+/* Same construction as the hero: one element, two stacked gradients.
+   The horizontal pass weights the reading side, the vertical pass
+   seats the type on the baseline. Light enough that the photograph
+   survives — it is there to be seen, not to be tinted out. */
+.band__media::after {
+  z-index: 1;
+  mix-blend-mode: normal;
+  background:
+    linear-gradient(95deg,  color-mix(in srgb, var(--c-graphite-deep) 92%, transparent) 0%,
+                            color-mix(in srgb, var(--c-graphite-deep) 74%, transparent) 40%,
+                            color-mix(in srgb, var(--c-graphite-deep) 18%, transparent) 100%),
+    linear-gradient(180deg, color-mix(in srgb, var(--c-graphite-deep) 34%, transparent) 0%,
+                            color-mix(in srgb, var(--c-graphite-deep) 10%, transparent) 42%,
+                            color-mix(in srgb, var(--c-graphite-deep) 72%, transparent) 100%);
+}
+
+/* Narrow screens: the copy runs the full width, so a horizontal veil
+   leaves the end of every line sitting on bare photograph. The block
+   seats its copy at the bottom, so the veil becomes vertical — the
+   picture stays open at the top and closes under the text. */
+@media (max-width: 900px) {
+  .band__media::after {
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--c-graphite-deep) 30%, transparent) 0%,
+                              color-mix(in srgb, var(--c-graphite-deep) 58%, transparent) 26%,
+                              color-mix(in srgb, var(--c-graphite-deep) 88%, transparent) 48%,
+                              color-mix(in srgb, var(--c-graphite-deep) 94%, transparent) 100%);
+  }
+}
+
+.band__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-block: clamp(var(--s-8), 5vw, var(--s-11));
+}
+
+.band__copy  { max-width: min(48ch, 100%); color: var(--c-on-navy); }
+.band__label { color: var(--c-accent); }
+.band__title { color: var(--c-white); margin-block: var(--s-5) var(--s-5); }
+.band__text  { color: var(--c-on-navy-mute); margin-bottom: var(--s-7); text-wrap: pretty; }
+.band__link  { color: var(--c-accent-bright); }
+
+/* The signature lockup, left-aligned where it opens a block rather
+   than centring one. */
+.lockup--left { justify-content: flex-start; }
+
+/* Counters animate from zero. Every value is padded to two digits
+   and the parent sets tabular figures, so the glyph box never
+   changes width and the count costs nothing in layout shift. */
+.count {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ============================================================
+   RELEASE — the ruled lists
+   Every ruled row on the page carries the same cyan draw as the
+   commitments, released in sequence when its section is reached.
+   One gesture, used everywhere, is what separates a designed page
+   from an assembled one.
+   ============================================================ */
+
+.gateway, .acad__item, .role, .pool { position: relative; }
+
+.gateway::before,
+.acad__item::before,
+.role::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: -1px;
+  height: var(--hairline);
+  background: var(--c-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--d-release) var(--ease);
+  transition-delay: var(--row-delay, 0ms);
+}
+.gate.is-released .gateway::before,
+.gate.is-released .acad__item::before,
+.gate.is-released .role::before { transform: scaleX(1); }
+
+/* On navy the rule is the brighter cyan, as it is on the gate heads. */
+.on-navy .acad__item::before { background: var(--c-accent); }
+
+/* The sequence. Staggered by position, not by when each row happens
+   to cross the viewport — choreography, not coincidence. */
+.gateway:nth-child(1), .acad__item:nth-child(1), .role:nth-child(1) { --row-delay:   0ms; }
+.gateway:nth-child(2), .acad__item:nth-child(2), .role:nth-child(2) { --row-delay:  90ms; }
+.gateway:nth-child(3), .acad__item:nth-child(3), .role:nth-child(3) { --row-delay: 180ms; }
+.gateway:nth-child(4),                          .role:nth-child(4) { --row-delay: 270ms; }
+.gateway:nth-child(5),                                                 .role:nth-child(5) { --row-delay: 360ms; }
+.gateway:nth-child(6),                                                 .role:nth-child(6) { --row-delay: 450ms; }
+
+.no-js .gateway::before,
+.no-js .acad__item::before,
+.no-js .role::before { transform: scaleX(1); }
+
+
+/* ============================================================
+   SECTORS — visual panels
+   Built for the homepage; reused as-is on the Sectors overview
+   page (markets/index.html), which is the destination of this
+   component's own "All sectors" link — same panels, same copy.
+   ============================================================ */
+
+/* ============================================================
+   06 · SECTORS — visual panels
+   An intro panel carrying the shared-discipline argument, then one
+   tall photographic panel per sector. Square geometry, hairline
+   dividers, and the release vocabulary: the imagery is uncovered in
+   sequence, and hovering a panel draws its rule and lifts the grade.
+   Panel widths never animate — a sliding accordion reflows the row
+   and reads as a slider plugin.
+   ============================================================ */
+
+.sectors {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 3fr);
+  min-height: clamp(34rem, 24rem + 20vw, 46rem);
+  background: var(--c-graphite);
+  color: var(--c-on-navy);
+}
+
+/* --- Intro panel --- */
+
+.sectors__intro {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(var(--s-6), 3vw, var(--s-9));
+}
+
+.sectors__head { display: flex; align-items: center; gap: var(--s-4); margin-bottom: var(--s-8); }
+.sectors__head .gate__num { color: var(--c-accent); }
+.sectors__head .label { color: var(--c-on-navy-mute); }
+.sectors__rule {
+  width: 2.5rem; height: var(--hairline);
+  background: var(--c-accent);
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform var(--d-release) var(--ease);
+}
+.gate.is-released .sectors__rule, .no-js .sectors__rule { transform: scaleX(1); }
+
+.sectors__title {
+  font-size: var(--fs-title);
+  color: var(--c-white);
+  margin-bottom: var(--s-6);
+}
+
+.sectors__text {
+  color: var(--c-on-navy-mute);
+  max-width: min(34ch, 100%);
+  margin-bottom: var(--s-7);
+  text-wrap: pretty;
+}
+
+/* The circular mark from the business card, carrying the arrow from
+   the logo. Shared by the intro link and every panel. */
+.circle {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 2.75rem; height: 2.75rem;
+  border: var(--hairline) solid color-mix(in srgb, var(--c-accent-bright) 45%, transparent);
+  border-radius: var(--radius-pill);
+  transition: border-color var(--d-base) var(--ease),
+              background   var(--d-base) var(--ease);
+}
+.circle svg { width: 16px; height: auto; color: var(--c-accent-bright); transition: transform var(--d-base) var(--ease); }
+
+.sectors__all {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-4);
+  align-self: flex-start;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--c-white);
+  text-decoration: none;
+}
+.sectors__all:hover .circle,
+.sector__link:hover .circle,
+.sector__link:focus-visible .circle { border-color: var(--c-accent); background: color-mix(in srgb, var(--c-accent) 16%, transparent); }
+.sectors__all:hover .circle svg,
+.sector__link:hover .circle svg { transform: translateX(3px); }
+
+.sectors__disciplines {
+  margin-top: auto;
+  padding-top: var(--s-8);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label);
+  line-height: 2;
+  text-transform: uppercase;
+  color: var(--c-on-navy-mute);
+}
+.sectors__disciplines::before {
+  content: "";
+  display: block;
+  width: 2rem; height: var(--rule-accent);
+  background: var(--c-accent);
+  margin-bottom: var(--s-5);
+}
+
+/* --- Photographic panels --- */
+
+.sectors__panels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sector { position: relative; min-width: 0; border-left: var(--hairline) solid color-mix(in srgb, var(--c-white) 10%, transparent); }
+
+.sector__link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: clamp(var(--s-5), 2.2vw, var(--s-7));
+  color: var(--c-white);
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.sector__media { position: absolute; inset: 0; }
+.sector__media img {
+  filter: grayscale(0.45) contrast(1.06);
+  transition: clip-path var(--d-wipe) var(--ease) var(--panel-delay, 0ms),
+              transform var(--d-slow) var(--ease),
+              filter    var(--d-slow) var(--ease);
+}
+.sector:nth-child(2) { --panel-delay: 140ms; }
+.sector:nth-child(3) { --panel-delay: 280ms; }
+.sector:nth-child(2) .sector__title { --wipe-delay: 140ms; }
+.sector:nth-child(3) .sector__title { --wipe-delay: 280ms; }
+
+.sector__link:hover .sector__media img,
+.sector__link:focus-visible .sector__media img { transform: scale(1.04); filter: grayscale(0.05) contrast(1.04); }
+
+/* Type sits on the dark ends of the veil; the middle of the
+   photograph stays open. */
+.sector__media::after {
+  mix-blend-mode: normal;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--c-graphite-deep) 86%, transparent) 0%,
+    color-mix(in srgb, var(--c-graphite-deep) 30%, transparent) 32%,
+    color-mix(in srgb, var(--c-graphite-deep) 22%, transparent) 50%,
+    color-mix(in srgb, var(--c-graphite-deep) 92%, transparent) 100%);
+}
+
+/* The release: a cyan rule draws across the top of the panel. */
+.sector__link::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0; top: 0;
+  z-index: 3;
+  height: var(--rule-accent);
+  background: var(--c-accent);
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform var(--d-base) var(--ease);
+}
+.sector__link:hover::before,
+.sector__link:focus-visible::before { transform: scaleX(1); }
+
+.sector__top, .sector__foot { position: relative; z-index: 2; }
+
+.sector__num { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-5); }
+.sector__num .gate__num { color: var(--c-accent-bright); }
+.sector__tick { width: 1.5rem; height: var(--hairline); background: color-mix(in srgb, var(--c-white) 50%, transparent); }
+
+.sector__title {
+  font-family: var(--f-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-h3);
+  line-height: var(--lh-heading);
+}
+
+.sector__foot { display: flex; align-items: flex-end; gap: var(--s-5); }
+.sector__desc {
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--c-on-navy);
+  text-wrap: pretty;
+}
+
+/* --- Responsive --- */
+
+@media (max-width: 1100px) {
+  .sectors { grid-template-columns: 1fr; min-height: 0; }
+  .sectors__disciplines {
+    display: flex; flex-wrap: wrap; gap: 0 var(--s-5);
+    padding-top: var(--s-7); line-height: 2;
+  }
+  /* Full-basis to force the line break, painted only 2rem wide so it
+     stays the short accent rule rather than a divider. */
+  .sectors__disciplines::before {
+    flex-basis: 100%;
+    background: linear-gradient(var(--c-accent), var(--c-accent)) left center / 2rem 100% no-repeat;
+  }
+  .sectors__panels { min-height: clamp(28rem, 20rem + 20vw, 34rem); }
+  .sector__foot { flex-direction: column; align-items: flex-start; }
+}
+/* Shorter panels put the description higher up the photograph, so the
+   veil closes earlier beneath it. */
+@media (max-width: 1100px) {
+  .sector__media::after {
+    background: linear-gradient(180deg,
+      color-mix(in srgb, var(--c-graphite-deep) 86%, transparent) 0%,
+      color-mix(in srgb, var(--c-graphite-deep) 35%, transparent) 28%,
+      color-mix(in srgb, var(--c-graphite-deep) 78%, transparent) 58%,
+      color-mix(in srgb, var(--c-graphite-deep) 95%, transparent) 100%);
+  }
+}
+@media (max-width: 760px) {
+  .sectors__panels { grid-template-columns: 1fr; min-height: 0; }
+  .sector { border-left: none; border-top: var(--hairline) solid color-mix(in srgb, var(--c-white) 10%, transparent); }
+  .sector__link { min-height: 26rem; }
+  .sector__foot { flex-direction: row; align-items: flex-end; }
+}
+
+/* Sectors carries its own dark ground, a step deeper than the card, so
+   the section reads as a dark beat in the page rhythm rather than a
+   dark card floating on a light page. */
+.sectors-section { background: var(--c-graphite-deep); }
+.sectors-section .sectors { box-shadow: 0 0 0 var(--hairline) var(--c-graphite-line); }
+
+
+/* ============================================================
+   PRECEDENT CARDS
+   Built for About's "Why FTR" section; reused wherever a claim is
+   backed by naming an international benchmark rather than asserting
+   it — the Sectors detail pages, for one.
+   ============================================================ */
+
+.precedents {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  margin-top: var(--s-9);
+}
+@media (max-width: 1100px) { .precedents { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px)  { .precedents { grid-template-columns: 1fr; } }
+
+.precedent {
+  padding-top: var(--s-5);
+  border-top: var(--hairline) solid var(--c-graphite-line);
+}
+.precedent__name { color: var(--c-white); margin-bottom: var(--s-2); }
+.precedent__anchor {
+  display: block;
+  margin-bottom: var(--s-4);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--c-accent);
+}
+.precedent__text { font-size: var(--fs-sm); color: var(--c-on-navy-mute); text-wrap: pretty; }
+
+/* One row of four: align name, anchor and text across the cards so a
+   two-line anchor does not push its text out of line. */
+@media (min-width: 1101px) {
+  @supports (grid-template-rows: subgrid) {
+    .precedents { row-gap: 0; grid-template-rows: auto auto 1fr; }
+    .precedent  { display: grid; grid-row: span 3; grid-template-rows: subgrid; }
+  }
+}
+
+
+/* ============================================================
+   TICKLIST
+   A plain dot-bullet list for scope items and commitments — built
+   for Governance's assurance list, reused anywhere a set of things
+   is being stated rather than argued.
+   ============================================================ */
+
+.spec__items {
+  margin: 0;
+  padding: 0;
+  border-top: var(--hairline) solid var(--c-ink);
+}
+.spec__items { list-style: none; }
+.spec__items li {
+  display: flex;
+  gap: var(--s-4);
+  padding-block: var(--s-4);
+  border-bottom: var(--hairline) solid var(--c-rule);
+  font-size: var(--fs-sm);
+  color: var(--c-ink);
+  text-wrap: pretty;
+}
+.spec__items li::before {
+  content: "";
+  flex: none;
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-top: 0.55em;
+  border-radius: var(--radius-pill);
+  background: var(--c-accent-ink);
+}
+
+
+/* ============================================================
+   TERMS — tap to explain
+   Every technical word is a dotted-underline button; its plain
+   definition opens beside it. The site never assumes the reader
+   already speaks the industry's shorthand.
+   ============================================================ */
+
+.term-wrap { position: relative; display: inline; }
+
+.term {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: help;
+  border-bottom: var(--hairline) dotted currentColor;
+  text-decoration: none;
+}
+.term:hover,
+.term[aria-expanded="true"] { color: var(--c-accent-ink); border-bottom-style: solid; }
+.on-navy .term:hover,
+.on-navy .term[aria-expanded="true"],
+.phero .term:hover,
+.phero .term[aria-expanded="true"] { color: var(--c-accent-bright); }
+
+.term__def {
+  position: absolute;
+  z-index: 30;
+  left: 0;
+  top: calc(100% + 0.5rem);
+  width: min(20rem, 80vw);
+  padding: var(--s-4) var(--s-5);
+  background: var(--c-graphite);
+  color: var(--c-on-navy);
+  border: var(--hairline) solid var(--c-graphite-line);
+  border-left: var(--rule-accent) solid var(--c-accent);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-regular, 400);
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+  text-align: left;
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--c-black) 30%, transparent);
+  display: none;
+}
+.term[aria-expanded="true"] + .term__def {
+  display: block;
+  animation: term-in var(--d-fast) var(--ease) both;
+}
+@keyframes term-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+/* Set by main.js when a definition would run off the right edge. */
+.term__def--end { left: auto; right: 0; }
+@media (max-width: 560px) {
+  .term-wrap { position: static; }
+  .term__def { left: var(--gutter); right: var(--gutter); width: auto; }
+}
+
+/* No JS: the definition is simply shown, in brackets, after the word. */
+.no-js .term { cursor: default; border-bottom: none; }
+.no-js .term__def {
+  position: static; display: inline; animation: none;
+  padding: 0; border: none; box-shadow: none; background: none;
+  color: inherit; font-size: inherit; width: auto;
+}
+.no-js .term__def::before { content: " ("; }
+.no-js .term__def::after  { content: ")"; }
+
+
+/* ============================================================
+   BREADCRUMBS, FAQ, NEXT STEP, LADDER
+   Orientation and answers: where am I, what does this mean, what
+   comes next. Shared by every inner page.
+   ============================================================ */
+
+.crumbs { margin-bottom: var(--s-5); }
+.crumbs ol {
+  display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-3);
+  list-style: none; margin: 0; padding: 0;
+  font-size: var(--fs-label); font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label); text-transform: uppercase;
+}
+.crumbs li + li::before { content: "/"; margin-right: var(--s-3); color: var(--c-on-navy-mute); }
+.crumbs a { color: var(--c-on-navy-mute); text-decoration: none; }
+.crumbs a:hover { color: var(--c-accent-bright); }
+.crumbs [aria-current] { color: var(--c-on-navy); }
+
+/* FAQ — native details, ruled rows */
+.faq { border-top: var(--hairline) solid var(--c-ink); margin-top: var(--s-8); }
+.faq__item { border-bottom: var(--hairline) solid var(--c-rule); }
+.faq__item summary {
+  display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-5);
+  padding-block: var(--s-5);
+  font-family: var(--f-display); font-size: var(--fs-h4); font-weight: var(--fw-medium);
+  cursor: pointer; list-style: none;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after {
+  content: "+"; flex: none; font-size: 1.5em; line-height: 1;
+  color: var(--c-accent-ink); transition: transform var(--d-base) var(--ease);
+}
+.faq__item[open] summary::after { transform: rotate(45deg); }
+.faq__item summary:hover { color: var(--c-accent-ink); }
+.faq__item p { padding-bottom: var(--s-6); max-width: var(--measure-tight); color: var(--c-ink-mute); text-wrap: pretty; }
+
+/* Next step — one large link before the closing call to action */
+.next {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: var(--s-4) var(--s-7);
+  padding-block: var(--s-7);
+  border-top: var(--hairline) solid var(--c-rule);
+  border-bottom: var(--hairline) solid var(--c-rule);
+  text-decoration: none; color: var(--c-ink);
+}
+.next__label { font-size: var(--fs-label); font-weight: var(--fw-semibold); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--c-ink-faint); }
+.next__title { display: inline-flex; align-items: center; gap: var(--s-4); font-family: var(--f-display); font-size: var(--fs-h2); font-weight: var(--fw-medium); letter-spacing: var(--ls-h2); }
+.next:hover .next__title { color: var(--c-accent-ink); }
+.next .link__arrow { transition: transform var(--d-base) var(--ease); }
+.next:hover .link__arrow { transform: translateX(6px); }
+
+/* Ladder — five levels, one open at a time (all shown without JS) */
+.ladder { margin-top: var(--s-8); }
+.ladder__tabs { display: none; gap: 0; border-bottom: var(--hairline) solid var(--c-rule); }
+.ladder--js .ladder__tabs { display: flex; }
+.ladder__tab {
+  flex: 1; padding: var(--s-4) var(--s-3); background: none; border: none;
+  border-bottom: var(--rule-accent) solid transparent; margin-bottom: -1px;
+  font-family: var(--f-display); font-size: var(--fs-h4); font-weight: var(--fw-medium);
+  color: var(--c-ink-mute); cursor: pointer; transition: color var(--d-fast) var(--ease), border-color var(--d-fast) var(--ease);
+}
+.ladder__tab:hover { color: var(--c-ink); }
+.ladder__tab[aria-selected="true"] { color: var(--c-accent-ink); border-bottom-color: var(--c-accent); }
+.ladder__panel { padding-block: var(--s-6); border-bottom: var(--hairline) solid var(--c-rule); }
+.ladder__panel h3 { margin-bottom: var(--s-3); }
+.ladder__panel p { max-width: var(--measure-tight); color: var(--c-ink-mute); text-wrap: pretty; }
+.ladder--js .ladder__panel { border-bottom: none; }
+.ladder--js .ladder__panel[hidden] { display: none; }
+.ladder__note { margin-top: var(--s-5); max-width: var(--measure-tight); font-weight: var(--fw-medium); }
+
+
+/* Breathing room between the next-step link and the closing call to action. */
+.cta--after { margin-top: var(--s-10); }
+
+
+/* ============================================================
+   TEXT ROLES — applied
+   Bare headings pick up the heading role and size from tokens.css,
+   so any h1–h4 on any page is consistent without a class. Dark
+   surfaces re-point the roles once, here, instead of every
+   component overriding its own colours.
+   ============================================================ */
+
+h1, h2, h3, h4 { font-family: var(--f-display); font-weight: var(--fw-medium); color: var(--c-heading); text-wrap: balance; }
+h1 { font-size: var(--fs-h1); line-height: var(--lh-tight);   letter-spacing: var(--ls-h1); }
+h2 { font-size: var(--fs-h2); line-height: var(--lh-heading); letter-spacing: var(--ls-h2); }
+h3 { font-size: var(--fs-h3); line-height: var(--lh-heading); letter-spacing: var(--ls-h3); }
+h4 { font-size: var(--fs-h4); line-height: var(--lh-heading); font-weight: var(--fw-semibold); }
+
+.on-navy, .hero, .phero, .band, .footer, .nav, .consent, .sectors {
+  --c-heading:     var(--c-heading-on-dark);
+  --c-text:        var(--c-text-on-dark);
+  --c-text-strong: var(--c-text-strong-on-dark);
+  --c-text-faint:  var(--c-text-faint-on-dark);
+  --c-label:       var(--c-label-on-dark);
+  --c-link:        var(--c-link-on-dark);
+  --c-number:      var(--c-number-on-dark);
+}
+
+.link { color: var(--c-link); }
+.gate__num { color: var(--c-number); }
+
+/* Outline button on dark ground */
+.on-navy .btn--outline, .band .btn--outline { color: var(--c-on-navy); border-color: var(--c-graphite-line); }
+.on-navy .btn--outline:hover, .band .btn--outline:hover { border-color: var(--c-accent); color: var(--c-accent-bright); }

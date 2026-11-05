@@ -1,0 +1,69 @@
+/* ============================================================
+   FTR — academy.css
+   Academy page only. Depends on tokens.css and base.css, which
+   carry the hero, split layout, facts, band, ticklist, FAQ and CTA.
+   ============================================================ */
+
+/* The model: hub, spokes, cascade — three linked steps. */
+.model {
+  list-style: none; margin: var(--s-9) 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--grid-gap);
+  counter-reset: none;
+}
+.model__step {
+  position: relative; min-width: 0;
+  padding-top: var(--s-6);
+  border-top: var(--hairline) solid var(--c-rule);
+}
+/* A cyan connector runs along the top of the three steps. */
+.model__step::before {
+  content: ""; position: absolute; left: 0; right: calc(var(--grid-gap) * -1); top: -1px;
+  height: var(--rule-accent); background: var(--c-cyan);
+  transform: scaleX(0); transform-origin: left; transition: transform var(--d-release) var(--ease);
+}
+.model__step:last-child::before { right: 0; }
+.model__step.is-in::before { transform: scaleX(1); }
+.model__step:nth-child(2)::before { transition-delay: 160ms; }
+.model__step:nth-child(3)::before { transition-delay: 320ms; }
+.no-js .model__step::before { transform: scaleX(1); }
+.model__num { display: block; margin-bottom: var(--s-4); font-family: var(--f-display); font-size: var(--fs-gate); letter-spacing: var(--ls-caps); color: var(--c-cyan-ink); }
+.model__kind { margin-bottom: var(--s-2); }
+.model__name { margin-bottom: var(--s-3); }
+.model__text { color: var(--c-ink-mute); text-wrap: pretty; }
+@media (max-width: 860px) {
+  .model { grid-template-columns: 1fr; }
+  .model__step::before, .model__step:last-child::before { right: 0; }
+}
+
+/* The nine programmes. */
+.progs {
+  list-style: none; margin: var(--s-9) 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 var(--grid-gap);
+}
+.prog { min-width: 0; padding: var(--s-5) 0 var(--s-6); border-top: var(--hairline) solid var(--c-rule); }
+.prog__num { display: block; margin-bottom: var(--s-3); font-family: var(--f-display); font-size: var(--fs-gate); letter-spacing: var(--ls-caps); color: var(--c-cyan-ink); }
+.prog__name { margin-bottom: var(--s-3); max-width: 22ch; }
+.prog__dur { display: inline-block; margin-bottom: var(--s-2); font-size: var(--fs-label); font-weight: var(--fw-semibold); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--c-cyan-ink); }
+.prog__for { font-size: var(--fs-sm); color: var(--c-ink-mute); }
+@media (max-width: 1000px) { .progs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .progs { grid-template-columns: 1fr; } }
+
+/* Facts on navy. */
+.facts--navy .fact { border-top-color: var(--c-navy-line); }
+.facts--navy .fact__label { color: var(--c-on-navy-mute); }
+.facts--navy .fact__value { color: var(--c-white); }
+.facts--navy .fact__note { color: var(--c-on-navy-mute); }
+.on-navy .split__head .h1 { color: var(--c-white); }
+.on-navy .split__body .lead { color: var(--c-on-navy-mute); }
+
+/* Government enablements. */
+.enable { list-style: none; margin: var(--s-9) 0 0; padding: 0; border-top: var(--hairline) solid var(--c-ink); }
+.enable__item {
+  display: grid; grid-template-columns: 3.25rem minmax(10rem, 16rem) minmax(0, 1fr); gap: var(--s-5);
+  padding-block: var(--s-5); border-bottom: var(--hairline) solid var(--c-rule);
+}
+.enable__num { font-family: var(--f-display); font-size: var(--fs-gate); letter-spacing: var(--ls-caps); color: var(--c-cyan-ink); padding-top: 0.35em; }
+.enable__text { color: var(--c-ink-mute); text-wrap: pretty; }
+@media (max-width: 760px) { .enable__item { grid-template-columns: 3rem 1fr; } .enable__text { grid-column: 2; } }
+
+.split__body .spec__items { margin-top: var(--s-7); }

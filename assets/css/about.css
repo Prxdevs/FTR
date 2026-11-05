@@ -1,0 +1,316 @@
+/* ============================================================
+   FTR — about.css
+   About page only. Depends on tokens.css and base.css.
+
+   Sections follow the page: hero, first time right, what we
+   bring, why FTR, leadership, governance, closing CTA.
+   ============================================================ */
+
+
+/* --- Index strip --- */
+
+.phero__strip {
+  position: relative;
+  z-index: 2;
+  border-top: var(--hairline) solid var(--c-navy-line);
+  background: var(--c-navy-deep);
+}
+
+.astrip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+.astrip__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  min-width: 0;
+  padding: var(--s-5) var(--s-5) var(--s-5) 0;
+  text-decoration: none;
+  color: var(--c-on-navy);
+  transition: color var(--d-fast) var(--ease);
+}
+.astrip__item + .astrip__item { padding-left: var(--s-5); }
+.astrip__item + .astrip__item::before {
+  content: "";
+  position: absolute;
+  left: 0; top: var(--s-5); bottom: var(--s-5);
+  width: var(--hairline);
+  background: var(--c-navy-line);
+}
+.astrip__item:hover { color: var(--c-cyan-bright); }
+
+.astrip__num {
+  font-family: var(--f-display);
+  font-size: var(--fs-gate);
+  letter-spacing: var(--ls-caps);
+  color: var(--c-cyan);
+}
+.astrip__name {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  line-height: 1.35;
+}
+
+@media (max-width: 860px) {
+  .astrip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .astrip__item { padding: var(--s-4) var(--s-4) var(--s-4) 0; }
+  .astrip__item:nth-child(odd)  { padding-left: 0; }
+  .astrip__item:nth-child(even) { padding-left: var(--s-4); }
+  .astrip__item:nth-child(odd)::before { display: none; }
+  .astrip__item:nth-child(n+3) { border-top: var(--hairline) solid var(--c-navy-line); }
+  .astrip__item:nth-child(5) { grid-column: 1 / -1; }
+}
+@media (max-width: 460px) {
+  .astrip__name { font-size: var(--fs-xs); }
+}
+
+
+/* ============================================================
+   01 · FIRST TIME RIGHT
+   Four reasons general M&E practice does not transfer.
+   ============================================================ */
+
+.points { list-style: none; margin: 0; padding: 0; }
+
+.point {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  gap: var(--s-5);
+  padding-block: var(--s-6);
+  border-top: var(--hairline) solid var(--c-rule);
+}
+.point:last-child { border-bottom: var(--hairline) solid var(--c-rule); }
+
+.point__num {
+  font-family: var(--f-display);
+  font-size: var(--fs-gate);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-caps);
+  color: var(--c-cyan-ink);
+  padding-top: 0.35em;
+}
+.point__title { margin-bottom: var(--s-3); }
+.point__text  { color: var(--c-ink-mute); text-wrap: pretty; }
+
+
+/* ============================================================
+   02 · WHAT WE BRING
+   Five parts, one identical structure: number and title on the
+   left, the client's own sentences on the right.
+   ============================================================ */
+
+.split__head--wide { grid-column: 1 / span 8; min-width: 0; }
+@media (max-width: 900px) { .split__head--wide { grid-column: 1 / -1; } }
+
+.brings { margin-top: var(--s-9); }
+
+.bring {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: var(--grid-gap);
+  padding-block: var(--s-7);
+  border-top: var(--hairline) solid var(--c-rule);
+}
+.bring:last-child { border-bottom: var(--hairline) solid var(--c-rule); }
+
+.bring__head {
+  grid-column: 1 / span 5;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-5);
+  min-width: 0;
+}
+.bring__num {
+  flex: none;
+  width: 2.25rem;
+  font-family: var(--f-display);
+  font-size: var(--fs-gate);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-caps);
+  color: var(--c-cyan-ink);
+}
+.bring__title { max-width: min(18ch, 100%); }
+
+.bring__body { grid-column: 7 / span 6; min-width: 0; }
+.bring__body p { color: var(--c-ink-mute); text-wrap: pretty; max-width: var(--measure-tight); }
+.bring__body strong { color: var(--c-ink); font-weight: var(--fw-semibold); }
+.bring__links { margin-top: var(--s-5); display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-6); }
+
+@media (max-width: 900px) {
+  .bring__head { grid-column: 1 / -1; }
+  .bring__body { grid-column: 1 / -1; margin-top: var(--s-4); }
+}
+
+
+.on-navy .split__head .h1 { color: var(--c-white); }
+.on-navy .note__body { color: var(--c-on-navy); }
+.on-navy .note__body strong { color: var(--c-white); font-weight: var(--fw-medium); }
+
+
+/* ============================================================
+   04 · LEADERSHIP
+   Equal weight, identical structure. The published biographies
+   are unbalanced, so the rows are aligned across the cards
+   (subgrid) rather than letting the longer one set the rhythm.
+   No portrait slot until genuine photographs exist: the pending
+   state is the card's small cyan circle carrying initials.
+   ============================================================ */
+
+.directors {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-9);
+  margin-top: var(--s-9);
+  max-width: 34rem;
+}
+
+.director {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-top: var(--s-6);
+  border-top: var(--hairline) solid var(--c-rule);
+}
+
+.director__mark {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  aspect-ratio: 1;
+  margin-bottom: var(--s-6);
+  border: var(--hairline) solid var(--c-cyan-ink);
+  border-radius: var(--radius-pill);
+}
+.director__mark::after {
+  content: attr(data-initials);
+  font-family: var(--f-display);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.08em;
+  color: var(--c-cyan-ink);
+  margin-right: -0.08em;
+}
+
+.director__name { margin-bottom: var(--s-2); }
+.director__role {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--c-cyan-ink);
+  margin-bottom: var(--s-4);
+  padding-bottom: var(--s-4);
+  border-bottom: var(--hairline) solid var(--c-rule);
+}
+.director__text { font-size: var(--fs-sm); color: var(--c-ink-mute); text-wrap: pretty; }
+
+@media (min-width: 861px) {
+  .directors { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: none; }
+
+  @supports (grid-template-rows: subgrid) {
+    .directors { row-gap: 0; column-gap: var(--grid-gap); grid-template-rows: auto auto auto 1fr; }
+    .director  { display: grid; grid-row: span 4; grid-template-rows: subgrid; }
+  }
+}
+
+.cv-note {
+  margin-top: var(--s-9);
+  padding-top: var(--s-6);
+  border-top: var(--hairline) solid var(--c-rule);
+  max-width: var(--measure-tight);
+  color: var(--c-ink-mute);
+  text-wrap: pretty;
+}
+.cv-note a { margin-left: var(--s-2); white-space: nowrap; }
+
+
+/* ============================================================
+   05 · GOVERNANCE
+   A specification sheet, not marketing: ruled rows, small-caps
+   keys, plain values.
+   ============================================================ */
+
+.gov { align-items: start; }
+
+/* The heading stays in view while the register scrolls past it. */
+@media (min-width: 901px) {
+  .gov .split__head { position: sticky; top: 8rem; }
+}
+
+.spec + .spec { margin-top: var(--s-9); }
+.spec__title { display: block; margin-bottom: var(--s-4); }
+
+.spec__list {
+  margin: 0;
+  padding: 0;
+  border-top: var(--hairline) solid var(--c-ink);
+}
+
+.spec__row {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, 11rem) minmax(0, 1fr);
+  gap: var(--s-5);
+  padding-block: var(--s-4);
+  border-bottom: var(--hairline) solid var(--c-rule);
+}
+.spec__row dt {
+  padding-top: 0.2em;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--c-ink-mute);
+}
+.spec__row dd {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--c-ink);
+  text-wrap: pretty;
+}
+.spec__row dd + dd { margin-top: var(--s-2); }
+.spec__row a { white-space: nowrap; }
+
+
+
+@media (max-width: 560px) {
+  .spec__row { grid-template-columns: minmax(0, 1fr); gap: var(--s-2); }
+}
+
+
+/* ============================================================
+   PEOPLE — a named person is the strongest "who are these people"
+   answer there is. Real photo when one exists, initials until then.
+   ============================================================ */
+
+.director__photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  margin-bottom: var(--s-5);
+  filter: grayscale(1) contrast(1.04);
+  transition: filter var(--d-slow) var(--ease);
+}
+.director:hover .director__photo { filter: grayscale(0.15) contrast(1.02); }
+
+/* What this person does for you, in one plain line. */
+.director__does {
+  margin-bottom: var(--s-4);
+  font-family: var(--f-display);
+  font-size: var(--fs-h4);
+  line-height: 1.35;
+  color: var(--c-ink);
+  text-wrap: balance;
+}
+
+/* A plain one-liner above each "what we bring" paragraph. */
+.bring__plain {
+  margin-bottom: var(--s-3);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  font-weight: var(--fw-medium);
+  color: var(--c-ink);
+  text-wrap: pretty;
+}
+
+/* Governance spec inside its toggle. */
+.faq__body { padding-bottom: var(--s-7); }
+.faq__body .spec + .spec { margin-top: var(--s-8); }

@@ -1,21 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Only released pages are listed. Pages still in preparation carry
-  noindex and are deliberately excluded: submitting a thin page is
-  how a new domain teaches Google that its pages are thin.
-  Each page is added here on the day it publishes.
--->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ftright.com/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-10-06</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://ftright.com/contact/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>yearly</changefreq>
+    <loc>https://ftright.com/about/</loc>
+    <lastmod>2026-10-06</lastmod>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ftright.com/services/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ftright.com/services/skills-development/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ftright.com/services/critical-construction/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ftright.com/services/india-market-entry/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ftright.com/sectors/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ftright.com/why-ftr/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ftright.com/careers/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ftright.com/contact/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ftright.com/privacy/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://ftright.com/terms/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.3</priority>
   </url>
 </urlset>

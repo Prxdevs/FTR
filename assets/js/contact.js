@@ -24,8 +24,8 @@
 
   if (!configured) {
     submit.disabled = true;
-    say('This form is not connected yet. Please call +91 95580 62611 in the ' +
-        'meantime — a director will answer.', 'is-error');
+    say('This form is not connected yet. Please email info@ftright.com in the ' +
+        'meantime.', 'is-error');
     return;
   }
 
@@ -56,7 +56,7 @@
         }
       })
       .catch(function () {
-        say('That did not send. Please call +91 95580 62611, or try again ' +
+        say('That did not send. Please email info@ftright.com, or try again ' +
             'in a moment.', 'is-error');
       })
       .then(function () { submit.disabled = false; });

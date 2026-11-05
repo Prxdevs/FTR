@@ -1,0 +1,136 @@
+/* ============================================================
+   FTR — sector.css
+   The three sector detail pages (Semiconductor, Data Centres,
+   Pharma GMP) only. Depends on tokens.css and base.css, which
+   carry the hero, split layout, facts, precedent cards, ticklist
+   and closing CTA.
+   ============================================================ */
+
+/* --- Sector hero photo ---
+   The one place these pages carry a real photograph in the hero:
+   each sector already has its own licensed image, unlike About or
+   Services, where none was topically specific enough to use. */
+.phero__photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.phero__photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  filter: grayscale(0.55) contrast(1.08);
+}
+.phero--semi  .phero__photo img { object-position: center 20%; }
+.phero--dc    .phero__photo img { object-position: center 35%; }
+.phero--pharma .phero__photo img { object-position: center 30%; }
+.phero__photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, rgba(20, 22, 27, 0.88) 0%,
+                            rgba(20, 22, 27, 0.55) 46%,
+                            rgba(20, 22, 27, 0.15) 100%),
+    linear-gradient(180deg, rgba(20, 22, 27, 0.45) 0%,
+                            rgba(20, 22, 27, 0.20) 42%,
+                            rgba(20, 22, 27, 0.85) 100%);
+}
+@media (max-width: 900px) {
+  .phero__photo::after {
+    background:
+      linear-gradient(180deg, rgba(20, 22, 27, 0.35) 0%,
+                              rgba(20, 22, 27, 0.62) 30%,
+                              rgba(20, 22, 27, 0.90) 55%,
+                              rgba(20, 22, 27, 0.95) 100%);
+  }
+}
+
+
+/* ============================================================
+   ANCHOR PROJECTS
+   Named, sourced sites rather than a generic capability claim.
+   Ruled rows, not a boxed table — the document voice used
+   everywhere else on the site.
+   ============================================================ */
+
+.anchors {
+  list-style: none;
+  margin: var(--s-9) 0 0;
+  padding: 0;
+  border-top: var(--hairline) solid var(--c-rule);
+}
+
+.anchor {
+  padding-block: var(--s-6);
+  border-bottom: var(--hairline) solid var(--c-rule);
+}
+
+.anchor__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-3) var(--s-6);
+  margin-bottom: var(--s-3);
+}
+.anchor__name { color: var(--c-ink); }
+.anchor__loc {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--c-ink-faint);
+}
+
+.anchor__scale {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--c-cyan-ink);
+  margin-bottom: var(--s-2);
+  text-wrap: pretty;
+}
+.anchor__demand { color: var(--c-ink-mute); text-wrap: pretty; max-width: var(--measure-tight); }
+.anchor__demand strong { color: var(--c-ink); font-weight: var(--fw-semibold); }
+
+
+/* --- Scope list heading, paired with the shared ticklist --- */
+.scope__title { display: block; margin-bottom: var(--s-4); }
+
+
+/* --- Precedent count variants ---
+   The shared 4-column grid (built for About's four countries) leaves
+   a sector with only one or two benchmarks stranded in a narrow
+   column with the rest of the navy section empty. Widened here
+   rather than changed at the source, since About always has four. */
+.precedents--one {
+  grid-template-columns: minmax(0, 28rem);
+}
+.precedents--two {
+  grid-template-columns: repeat(2, minmax(0, 24rem));
+  gap: var(--s-10);
+}
+@media (max-width: 620px) {
+  .precedents--one, .precedents--two { grid-template-columns: minmax(0, 1fr); }
+}
+
+
+/* ============================================================
+   WHAT WE DELIVER — plain name left, plain reason right
+   ============================================================ */
+
+.deliver { list-style: none; margin: 0; padding: 0; border-top: var(--hairline) solid var(--c-ink); }
+.deliver__item {
+  display: grid;
+  grid-template-columns: minmax(9rem, 12rem) minmax(0, 1fr);
+  gap: var(--s-5);
+  padding-block: var(--s-5);
+  border-bottom: var(--hairline) solid var(--c-rule);
+}
+.deliver__name { color: var(--c-ink); }
+.deliver__text { color: var(--c-ink-mute); text-wrap: pretty; }
+@media (max-width: 560px) { .deliver__item { grid-template-columns: 1fr; gap: var(--s-2); } }
+
+/* A single headline figure under the argument, not a row of four. */
+.facts--one { grid-template-columns: minmax(0, 34rem); margin-top: var(--s-8); }
+.facts--one .fact { padding-right: 0; }
+

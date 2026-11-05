@@ -4,29 +4,104 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>About Us | FTR</title>
-<meta name="description" content="About Us — FTRight Tech-Infra and Solutions. This page is in preparation.">
+<title>About FTR &mdash; Mission-Critical Construction in India</title>
+<meta name="description" content="FTR is an India-based mission-critical M&amp;E construction, consultancy and skills company, led by people with 30+ years of European delivery experience.">
+<link rel="canonical" href="https://ftright.com/about/">
 
-<!-- Not yet released, so not yet indexed. Set server-side in the markup,
-     never toggled by JavaScript: Googlebot may skip rendering entirely
-     and misread a JS-applied directive. "follow" is kept so link equity
-     still flows back to the pages that ARE complete. -->
-<meta name="robots" content="noindex, follow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ftright.com/about/">
+<meta property="og:title" content="About FTR &mdash; Mission-Critical Construction in India">
+<meta property="og:description" content="FTR is an India-based mission-critical M&amp;E construction, consultancy and skills company, led by people with 30+ years of European delivery experience.">
+<meta property="og:image" content="https://ftright.com/assets/img/og-default.jpg">
+<meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="../assets/img/favicon-180.png">
+
 <link rel="preload" href="../assets/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-<link rel="stylesheet" href="../assets/css/fonts.css">
-<link rel="stylesheet" href="../assets/css/tokens.css">
-<link rel="stylesheet" href="../assets/css/base.css">
-<link rel="stylesheet" href="../assets/css/holding.css">
+<link rel="stylesheet" href="../assets/css/site.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://ftright.com/#organization",
+      "name": "FTR",
+      "alternateName": "First Time Right",
+      "legalName": "Ftright Tech-Infra & Solutions Private Limited",
+      "url": "https://ftright.com/",
+      "logo": "https://ftright.com/assets/img/ftr-logo-64.png",
+      "areaServed": {
+        "@type": "Country",
+        "name": "India"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "info@ftright.com"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://ftright.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "About",
+          "item": "https://ftright.com/about/"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "name": "Vishnubhai (ND) Chaudhari",
+      "jobTitle": "Executive Director, Corporate Affairs",
+      "worksFor": {
+        "@id": "https://ftright.com/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "name": "Paul Colleary",
+      "jobTitle": "Executive Director, Operations",
+      "worksFor": {
+        "@id": "https://ftright.com/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "name": "Trushti Raval",
+      "jobTitle": "CEO & Managing Director",
+      "worksFor": {
+        "@id": "https://ftright.com/#organization"
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
 
 <a class="skip" href="#main">Skip to content</a>
+
+<div class="spine" aria-hidden="true">
+  <span class="spine__rule"></span>
+  <span class="spine__fill"></span>
+  <img class="spine__arrow" src="../assets/img/ftr-arrow-24.png" srcset="../assets/img/ftr-arrow-24.png 1x, ../assets/img/ftr-arrow-48.png 2x" alt="" width="24" height="16">
+</div>
 
 <header class="header is-stuck">
   <div class="shell header__bar">
@@ -36,10 +111,13 @@
            alt="FTR — First Time Right" width="113" height="40">
     </a>
 
-    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav">
-      <span class="nav__toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
-      <span class="u-visually-hidden">Menu</span>
-    </button>
+    <div class="header__actions">
+      <a class="btn btn--primary header__cta" href="../contact/">Discuss your project</a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav">
+        <span class="nav__toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="u-visually-hidden">Menu</span>
+      </button>
+    </div>
 
     <nav class="nav" id="nav" aria-label="Primary">
       <div class="nav__head">
@@ -55,49 +133,58 @@
       <span class="nav__label">Navigation</span>
 
       <ol class="nav__list">
-        <li class="nav__item" style="--i:0">
-          <a class="nav__link" href="../about/">
+        <li class="nav__item">
+          <a class="nav__link" href="../">
             <span class="nav__num">01</span>
-            <span class="nav__name">About Us</span>
-            <img class="nav__arrow" src="../assets/img/ftr-arrow-16.png"
-                 srcset="../assets/img/ftr-arrow-16.png 1x, ../assets/img/ftr-arrow-32.png 2x"
-                 alt="" width="16" height="11">
+            <span class="nav__name">Home</span>
+            <svg class="nav__arrow" viewBox="0 0 16 11" width="16" height="11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 5.5h13.5M10 1l4.5 4.5L10 10"/></svg>
           </a>
         </li>
-        <li class="nav__item" style="--i:1">
-          <a class="nav__link" href="../services/">
+        <li class="nav__item">
+          <a class="nav__link" href="../about/" aria-current="page">
             <span class="nav__num">02</span>
-            <span class="nav__name">Services</span>
-            <img class="nav__arrow" src="../assets/img/ftr-arrow-16.png"
-                 srcset="../assets/img/ftr-arrow-16.png 1x, ../assets/img/ftr-arrow-32.png 2x"
-                 alt="" width="16" height="11">
+            <span class="nav__name">About</span>
+            <svg class="nav__arrow" viewBox="0 0 16 11" width="16" height="11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 5.5h13.5M10 1l4.5 4.5L10 10"/></svg>
           </a>
         </li>
-        <li class="nav__item" style="--i:2">
-          <a class="nav__link" href="../academy/">
+        <li class="nav__item">
+          <a class="nav__link" href="../services/">
             <span class="nav__num">03</span>
-            <span class="nav__name">Academy</span>
-            <img class="nav__arrow" src="../assets/img/ftr-arrow-16.png"
-                 srcset="../assets/img/ftr-arrow-16.png 1x, ../assets/img/ftr-arrow-32.png 2x"
-                 alt="" width="16" height="11">
+            <span class="nav__name">Services</span>
+            <svg class="nav__arrow" viewBox="0 0 16 11" width="16" height="11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 5.5h13.5M10 1l4.5 4.5L10 10"/></svg>
           </a>
+          <ul class="nav__sub">
+            <li><a href="../services/skills-development/">Skills Development</a></li>
+            <li><a href="../services/critical-construction/">Critical Construction</a></li>
+            <li><a href="../services/india-market-entry/">India Market Entry</a></li>
+          </ul>
         </li>
-        <li class="nav__item" style="--i:3">
-          <a class="nav__link" href="../markets/">
+        <li class="nav__item">
+          <a class="nav__link" href="../sectors/">
             <span class="nav__num">04</span>
-            <span class="nav__name">Markets</span>
-            <img class="nav__arrow" src="../assets/img/ftr-arrow-16.png"
-                 srcset="../assets/img/ftr-arrow-16.png 1x, ../assets/img/ftr-arrow-32.png 2x"
-                 alt="" width="16" height="11">
+            <span class="nav__name">Sectors</span>
+            <svg class="nav__arrow" viewBox="0 0 16 11" width="16" height="11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 5.5h13.5M10 1l4.5 4.5L10 10"/></svg>
           </a>
         </li>
-        <li class="nav__item" style="--i:4">
-          <a class="nav__link" href="../contact/">
+        <li class="nav__item">
+          <a class="nav__link" href="../why-ftr/">
             <span class="nav__num">05</span>
+            <span class="nav__name">Why FTR</span>
+            <svg class="nav__arrow" viewBox="0 0 16 11" width="16" height="11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 5.5h13.5M10 1l4.5 4.5L10 10"/></svg>
+          </a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="../careers/">
+            <span class="nav__num">06</span>
+            <span class="nav__name">Careers</span>
+            <svg class="nav__arrow" viewBox="0 0 16 11" width="16" height="11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 5.5h13.5M10 1l4.5 4.5L10 10"/></svg>
+          </a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="../contact/">
+            <span class="nav__num">07</span>
             <span class="nav__name">Contact</span>
-            <img class="nav__arrow" src="../assets/img/ftr-arrow-16.png"
-                 srcset="../assets/img/ftr-arrow-16.png 1x, ../assets/img/ftr-arrow-32.png 2x"
-                 alt="" width="16" height="11">
+            <svg class="nav__arrow" viewBox="0 0 16 11" width="16" height="11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 5.5h13.5M10 1l4.5 4.5L10 10"/></svg>
           </a>
         </li>
       </ol>
@@ -114,44 +201,240 @@
 </header>
 
 <main id="main">
-  <section class="holding">
 
-    <div class="holding__watermark" aria-hidden="true">
-      <img src="../assets/img/ftr-mark.webp" alt="" width="1200" height="423">
+
+  <section class="phero" aria-labelledby="h1">
+    <div class="phero__photo">
+      <img src="../assets/img/fire-main-1600.webp"
+           srcset="../assets/img/fire-main-640.webp 640w, ../assets/img/fire-main-1024.webp 1024w, ../assets/img/fire-main-1600.webp 1600w"
+           sizes="100vw" alt="Engineer in high-visibility clothing inspecting pipework in a plant room" width="1600" height="1066" fetchpriority="high" decoding="async">
     </div>
+    <div class="shell phero__inner">
+      <span class="label phero__label reveal">About FTR</span>
+      <h1 class="display phero__title" id="h1">Irish and European mission-critical know-how, skilled and built into India&rsquo;s next generation of facilities.</h1>
+      <p class="phero__lede reveal">FTR (First Time Right) is an India-based mission-critical M&amp;E construction, consultancy and skills company.</p>
+    </div>
+  </section>
 
-    <div class="holding__inner">
-      <span class="label holding__ref">Company</span>
-
-      <h1 class="h1 holding__title">About Us</h1>
-
-      <p class="holding__status">
-        <span class="holding__dot" aria-hidden="true"></span>
-        In preparation
-      </p>
-
-      <p class="holding__text">
-        This page publishes when it is complete, and not before.
-        Until then, a director will answer any question on
-        the company directly.
-      </p>
-
-      <div class="holding__actions">
-        <a class="btn btn--primary" href="../contact/">Send an enquiry</a>
-        <a class="btn btn--ghost" href="tel:+919558062611">+91 95580 62611</a>
+  <section class="section gate" id="who" aria-labelledby="who-h">
+    <div class="shell">
+      <div class="gate__head">
+        <span class="gate__num">01</span>
+        <span class="label">Who we are</span>
       </div>
+      <div class="who">
+        <div class="who__copy">
+          <h2 class="h2 wipe" id="who-h">What FTR does.</h2>
+          <p class="lead reveal">FTR (First Time Right) is an <span class="hl">India-based</span> mission-critical <span class="hl">M&amp;E construction, consultancy and skills</span> company. We work on semiconductor fabs, ATMP/OSAT units, hyperscale data centres and cleanroom facilities, and help <span class="hl">European companies</span> establish their base in India.</p>
+          <ul class="chips reveal" aria-label="Facility classes">
+            <li class="chip"><svg class="icon" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="14" height="14" rx="1.5"/><rect x="13" y="13" width="6" height="6"/><path d="M12 9V4M16 9V4M20 9V4M12 28v-5M16 28v-5M20 28v-5M9 12H4M9 16H4M9 20H4M28 12h-5M28 16h-5M28 20h-5"/></svg>Semiconductor fabs</li>
+            <li class="chip"><svg class="icon" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="6" width="22" height="7" rx="1.5"/><rect x="5" y="14" width="22" height="7" rx="1.5"/><path d="M9 25h14"/><path d="M9.5 9.5h.01M9.5 17.5h.01"/></svg>ATMP/OSAT units</li>
+            <li class="chip"><svg class="icon" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="4" width="22" height="7" rx="1.5"/><rect x="5" y="12.5" width="22" height="7" rx="1.5"/><rect x="5" y="21" width="22" height="7" rx="1.5"/><path d="M9 7.5h.01M9 16h.01M9 24.5h.01M14 7.5h9M14 16h9M14 24.5h9"/></svg>Hyperscale data centres</li>
+            <li class="chip"><svg class="icon" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="5" width="24" height="22" rx="1.5"/><path d="M4 12h24M4 19h24M12 5v22M20 5v22"/></svg>Cleanroom facilities</li>
+          </ul>
+        </div>
+        <div class="who__media">
+          <figure class="who__photo reveal"><img src="../assets/img/crew-vests-1024.webp" srcset="../assets/img/crew-vests-640.webp 640w, ../assets/img/crew-vests-1024.webp 1024w, ../assets/img/crew-vests-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 22vw" alt="Workers in high-visibility vests and hard hats working together on site" width="1024" height="682" loading="lazy" decoding="async"></figure>
+          <figure class="who__photo who__photo--low reveal"><img src="../assets/img/crew-orange-1024.webp" srcset="../assets/img/crew-orange-640.webp 640w, ../assets/img/crew-orange-1024.webp 1024w, ../assets/img/crew-orange-1600.webp 1600w" sizes="(max-width: 900px) 50vw, 22vw" alt="Crew in orange overalls and yellow hard hats at an industrial plant" width="1024" height="682" loading="lazy" decoding="async"></figure>
+        </div>
+        <aside class="who__mission on-navy reveal" aria-label="Our mission">
+          <span class="label">Our mission</span>
+          <p class="who__quote">Build India&rsquo;s mission-critical facilities <span class="hl">right first time</span> &mdash; and leave the <span class="hl">skills</span> behind so the capability stays in India.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
 
-      <div class="holding__lockup">
-        <div class="lockup">
-          <span class="lockup__rule" aria-hidden="true"></span>
-          <span class="lockup__text">First Time Right</span>
-          <span class="lockup__rule" aria-hidden="true"></span>
+  <section class="section on-paper gate" id="approach" aria-labelledby="approach-h">
+    <div class="shell">
+      <div class="gate__head">
+        <span class="gate__num">02</span>
+        <span class="label">Our approach</span>
+      </div>
+      <div class="grid">
+        <div class="split__head split__head--wide">
+          <h2 class="h2 wipe" id="approach-h">Three commitments in how we work.</h2>
+        </div>
+      </div>
+      <ul class="ptiles ptiles--3">
+        <li class="ptile reveal">
+          <div class="ptile__media"><img src="../assets/img/laptop-review-1024.webp" srcset="../assets/img/laptop-review-640.webp 640w, ../assets/img/laptop-review-1024.webp 1024w, ../assets/img/laptop-review-1600.webp 1600w" sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 25vw" alt="Engineers in hard hats reviewing a drawing on a laptop" width="1024" height="682" loading="lazy" decoding="async"></div>
+          <div class="ptile__body">
+            <svg class="icon" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="12"/><path d="M4 16h24M16 4c-4 4-4 20 0 24M16 4c4 4 4 20 0 24"/></svg>
+            <h3 class="ptile__title">Irish and European execution standards, applied to the Indian programme</h3>
+          </div>
+        </li>
+        <li class="ptile reveal">
+          <div class="ptile__media"><img src="../assets/img/qc-microscope-1024.webp" srcset="../assets/img/qc-microscope-640.webp 640w, ../assets/img/qc-microscope-1024.webp 1024w, ../assets/img/qc-microscope-1600.webp 1600w" sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 25vw" alt="Technician in protective clothing inspecting a sample under a microscope" width="1024" height="682" loading="lazy" decoding="async"></div>
+          <div class="ptile__body">
+            <svg class="icon" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="12"/><path d="M10.5 16.5l4 4 7-8"/></svg>
+            <h3 class="ptile__title">Commissioning and quality planned from day one, not bolted on at the end</h3>
+          </div>
+        </li>
+        <li class="ptile reveal">
+          <div class="ptile__media"><img src="../assets/img/drawing-review-1024.webp" srcset="../assets/img/drawing-review-640.webp 640w, ../assets/img/drawing-review-1024.webp 1024w, ../assets/img/drawing-review-1600.webp 1600w" sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 25vw" alt="Engineer in a high-visibility vest reviewing drawings with a colleague" width="1024" height="682" loading="lazy" decoding="async"></div>
+          <div class="ptile__body">
+            <svg class="icon" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="4"/><circle cx="22" cy="12" r="3.2"/><path d="M3 27c0-5 3.5-8 8-8s8 3 8 8"/><path d="M20 20c4 0 9 2 9 7"/></svg>
+            <h3 class="ptile__title">Train-the-trainer model: every project and programme builds Indian capability</h3>
+          </div>
+        </li>
+      </ul>
+      <p class="stat__src">Our observations relate to the mission-critical facility class, not to Indian construction generally.</p>
+    </div>
+  </section>
+
+  <section class="section gate" id="leadership" aria-labelledby="leadership-h">
+    <div class="shell">
+      <div class="gate__head">
+        <span class="gate__num">03</span>
+        <span class="label">Leadership</span>
+        <span class="gate__status">Who you will deal with</span>
+      </div>
+      <div class="grid">
+        <div class="split__head split__head--wide">
+          <h2 class="h2 wipe" id="leadership-h">The people behind FTR.</h2>
+        </div>
+      </div>
+      <ul class="team team--about">
+        <li class="member reveal">
+          <span class="member__photo" data-initials="VC" aria-hidden="true"></span>
+          <div class="member__text">
+            <h3 class="member__name"><button class="member__open" type="button" aria-haspopup="dialog" aria-controls="person-vishnubhai-chaudhari" data-person="person-vishnubhai-chaudhari">Vishnubhai (ND) Chaudhari</button></h3>
+            <p class="member__role">Executive Director, Corporate Affairs</p>
+            <span class="member__more" aria-hidden="true">View profile <svg viewBox="0 0 16 11" width="14" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5.5h13.5M10 1l4.5 4.5L10 10"/></svg></span>
+          </div>
+          <dialog class="profile" id="person-vishnubhai-chaudhari" aria-labelledby="person-vishnubhai-chaudhari-h">
+            <div class="profile__inner">
+              <button class="profile__close" type="button"><span class="u-visually-hidden">Close profile</span><span aria-hidden="true">&times;</span></button>
+              <span class="profile__photo" data-initials="VC" aria-hidden="true"></span>
+              <div class="profile__body">
+                <h3 class="profile__name" id="person-vishnubhai-chaudhari-h">Vishnubhai (ND) Chaudhari</h3>
+                <p class="profile__role">Executive Director, Corporate Affairs</p>
+                <p class="profile__bio">ND (Vishnubhai) Chaudhari is Executive Director, Corporate Affairs at FTR. He brings more than 35 years of experience across Indian industry, real estate development and enterprise leadership. He has developed and built his own commercial centres, giving him first-hand command of project planning, approvals and construction delivery in the Indian market.</p>
+                <p class="profile__bio">Over three decades, he has built long-standing, trusted relationships with senior leaders across the public sector and Indian industry. These relationships let FTR align its programmes with national and state priorities, and engage partners with credibility from the outset.</p>
+                <p class="profile__bio">At FTR, he guides market strategy, institutional engagement and the company&rsquo;s long-term vision as India expands its semiconductor, data centre and critical infrastructure base.</p>
+              </div>
+            </div>
+          </dialog>
+        </li>
+        <li class="member reveal">
+          <span class="member__photo" data-initials="PC" aria-hidden="true"></span>
+          <div class="member__text">
+            <h3 class="member__name"><button class="member__open" type="button" aria-haspopup="dialog" aria-controls="person-paul-colleary" data-person="person-paul-colleary">Paul Colleary</button></h3>
+            <p class="member__role">Executive Director, Operations</p>
+            <span class="member__more" aria-hidden="true">View profile <svg viewBox="0 0 16 11" width="14" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5.5h13.5M10 1l4.5 4.5L10 10"/></svg></span>
+          </div>
+          <dialog class="profile" id="person-paul-colleary" aria-labelledby="person-paul-colleary-h">
+            <div class="profile__inner">
+              <button class="profile__close" type="button"><span class="u-visually-hidden">Close profile</span><span aria-hidden="true">&times;</span></button>
+              <span class="profile__photo" data-initials="PC" aria-hidden="true"></span>
+              <div class="profile__body">
+                <h3 class="profile__name" id="person-paul-colleary-h">Paul Colleary</h3>
+                <p class="profile__role">Executive Director, Operations</p>
+                <p class="profile__bio">30+ years in mission-critical M&amp;E delivery across Ireland, Germany and wider Europe, rising from the trades to Manager of the Planning department. Experience with Suir Engineering, Jones Engineering and AM Technical Solutions. Has spent the last couple of years on a semiconductor project in India, so knows the industry from both European and Indian sides. Keen eye for quality; special interest in cleanroom fundamentals for semiconductor fabs.</p>
+              </div>
+            </div>
+          </dialog>
+        </li>
+        <li class="member reveal">
+          <span class="member__photo" data-initials="TR" aria-hidden="true"></span>
+          <div class="member__text">
+            <h3 class="member__name"><button class="member__open" type="button" aria-haspopup="dialog" aria-controls="person-trushti-raval" data-person="person-trushti-raval">Trushti Raval</button></h3>
+            <p class="member__role">CEO &amp; Managing Director</p>
+            <span class="member__more" aria-hidden="true">View profile <svg viewBox="0 0 16 11" width="14" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5.5h13.5M10 1l4.5 4.5L10 10"/></svg></span>
+          </div>
+          <dialog class="profile" id="person-trushti-raval" aria-labelledby="person-trushti-raval-h">
+            <div class="profile__inner">
+              <button class="profile__close" type="button"><span class="u-visually-hidden">Close profile</span><span aria-hidden="true">&times;</span></button>
+              <span class="profile__photo" data-initials="TR" aria-hidden="true"></span>
+              <div class="profile__body">
+                <h3 class="profile__name" id="person-trushti-raval-h">Trushti Raval</h3>
+                <p class="profile__role">CEO &amp; Managing Director</p>
+                <p class="profile__bio">Electrical Engineering (India); Business Management, Finance (England).</p>
+                <p class="profile__bio">Five years dedicated to European, Irish and British critical-infrastructure talent &mdash; data centres, semiconductors, battery manufacturing &mdash; across every CSA and MEP discipline.</p>
+              </div>
+            </div>
+          </dialog>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section on-navy gate" id="contact-cta" aria-labelledby="cta-h">
+    <div class="shell">
+      
+      <div class="cta cta--after reveal">
+        <h2 class="h1 cta__title wipe" id="cta-h">Let&rsquo;s build it right first time.</h2>
+        <p class="lead cta__text">Tell us about the facility, the programme and the constraint. A member of the FTR team will reply.</p>
+        <div class="cta__actions">
+          <a class="btn btn--primary" href="../contact/">Discuss your project</a>
+          <a class="btn btn--outline" href="mailto:info@ftright.com">info@ftright.com</a>
         </div>
       </div>
     </div>
-
   </section>
+
+
 </main>
+
+
+<footer class="footer">
+  <div class="shell footer__shell">
+
+    <div class="grid footer__grid">
+      <div class="footer__brand">
+        <img class="footer__logo" src="../assets/img/ftr-logo-28.png"
+             srcset="../assets/img/ftr-logo-28.png 1x, ../assets/img/ftr-logo-56.png 2x"
+             alt="FTR — First Time Right" width="79" height="28" loading="lazy">
+        <p class="footer__about">Mission-critical construction, commissioning, skills and India market entry.</p>
+        <p class="footer__contact"><a href="mailto:info@ftright.com">info@ftright.com</a></p>
+      </div>
+
+      <div class="footer__col">
+        <h2 class="footer__title">Services</h2>
+        <ul class="footer__list">
+          <li><a href="../services/skills-development/">Skills Development</a></li>
+          <li><a href="../services/critical-construction/">Critical Construction &amp; Consultancy</a></li>
+          <li><a href="../services/india-market-entry/">India Market Entry</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h2 class="footer__title">Company</h2>
+        <ul class="footer__list">
+          <li><a href="../about/">About</a></li>
+          <li><a href="../sectors/">Sectors</a></li>
+          <li><a href="../why-ftr/">Why FTR</a></li>
+          <li><a href="../careers/">Careers</a></li>
+          <li><a href="../contact/">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h2 class="footer__title">Legal</h2>
+        <ul class="footer__list">
+          <li><a href="../privacy/">Privacy Policy</a></li>
+          <li><a href="../terms/">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__lockup">
+      <div class="lockup">
+        <span class="lockup__rule" aria-hidden="true"></span>
+        <span class="lockup__text">First Time Right</span>
+        <span class="lockup__rule" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <div class="footer__meta">
+      <span>Ftright Tech-Infra &amp; Solutions Private Limited</span>
+      <span>CIN U42909GJ2026PTC181309</span>
+      <span class="footer__issue">&copy; 2026</span>
+    </div>
+
+  </div>
+</footer>
 
 <script src="../assets/js/main.js" defer></script>
 </body>

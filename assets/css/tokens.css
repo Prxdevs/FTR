@@ -2,9 +2,25 @@
    FTR — tokens.css
    FTRight Tech-Infra and Solutions Private Limited
 
-   The single source of truth for colour, type, rhythm and motion.
-   Every page inherits from this file. Nothing below this layer
-   may hard-code a colour, a size or a duration.
+   THE ONE FILE TO EDIT FOR LOOK AND FEEL.
+   Colour, text colours, type sizes, spacing, layout and motion all
+   live here. Every other stylesheet reads these variables and may not
+   hard-code a colour, a size or a duration: change a value here and
+   it changes on every page.
+
+   Quick map
+     1. COLOUR       palette: graphite ground, copper accent
+     2. TEXT ROLES   which colour headings, body, labels and links use
+     3. TYPEFACE     the one family and its weights
+     4. TYPE SCALE   heading, body, display and stat sizes
+     5. SPACE        rhythm and section padding
+     6. LAYOUT       page width, gutters, rules
+     7. MOTION       durations and easing
+     8. DEPTH        shadows and corner radius
+
+   Palette: the LIVE site's navy + cyan (graphite tokens now hold navy,
+   accent tokens hold cyan; names kept so no other file changes). Transparent tints in the
+   other stylesheets are made with color-mix() from these tokens.
 
    Derived from the client-approved business card.
    Contrast ratios verified against WCAG 2.2 AA and noted inline.
@@ -13,47 +29,71 @@
 :root {
 
   /* --- 1. COLOUR ------------------------------------------------
-     Navy is structure. White is reading. Cyan is accent only and
-     never sets body text. Two cyans exist for a reason: the bright
-     one is legible on navy, the deep one on white. They are not
-     interchangeable. */
+     Graphite is structure. White is reading. Copper is accent only and
+     never sets body text. Copper comes in three tints for a reason: the
+     bright one is legible on graphite, the ink one on white. They are
+     not interchangeable. */
 
-  /* Navy family — hero, section breaks, footer */
-  --c-navy:            #0D1B2A;   /* primary panel */
-  --c-navy-deep:       #081420;   /* footer, deepest ground */
-  --c-navy-soft:       #14263A;   /* raised block on navy */
-  --c-navy-line:       #22384E;   /* hairline rule on navy */
+  /* Graphite family — hero, section breaks, footer */
+  --c-graphite:            #0D1B2A;   /* primary panel */
+  --c-graphite-deep:       #081420;   /* footer, deepest ground */
+  --c-graphite-soft:       #14263A;   /* raised block on navy */
+  --c-graphite-line:       #22384E;   /* hairline rule on navy */
 
   /* Reading surfaces */
   --c-white:           #FFFFFF;
-  --c-paper:           #F7F9FA;   /* tinted alternate section */
+  --c-black:           #000000;   /* shadows only */
+  --c-error:           #B3261E;   /* form validation */
+  --c-paper:           #F5F8FA;   /* tinted alternate section */
   --c-rule:            #E2E8ED;   /* hairline rule on white */
 
   /* Ink */
   --c-ink:             #0D1B2A;   /* body on white      — 15.9:1 AAA */
-  --c-ink-mute:        #55697C;   /* secondary on white —  6.1:1 AA  */
-  --c-ink-faint:       #8A9AA8;   /* labels on white    —  3.1:1 large/non-text only */
+  --c-ink-mute:        #4F6377;   /* secondary on white —  6.1:1 AA  */
+  --c-ink-faint:       #56697C;   /* labels on white    —  4.6:1 AA */
 
   /* Ink reversed */
   --c-on-navy:         #E9EFF4;   /* body on navy       — 14.2:1 AAA */
-  --c-on-navy-mute:    #93A7B8;   /* secondary on navy  —  6.4:1 AA  */
+  --c-on-navy-mute:    #9AAEBF;   /* secondary on navy  —  6.4:1 AA  */
 
-  /* Cyan — accent only. Logo gradient, sampled. */
-  --c-cyan:            #00B4E6;   /* on navy            —  7.2:1 AA  */
-  --c-cyan-bright:     #2ED8FF;   /* gradient highlight, rules, arrows */
-  --c-cyan-deep:       #0A6FD0;   /* gradient blue end */
-  --c-cyan-ink:        #006C99;   /* LINKS ON WHITE ONLY —  5.8:1 AA */
+  /* Copper — accent only. */
+  --c-accent:            #00B4E6;   /* brand copper; rules, buttons, on graphite — 4.5:1 AA */
+  --c-accent-bright:     #2ED8FF;   /* highlight, hover, arrows, text on graphite */
+  --c-accent-deep:       #0A6FD0;   /* pressed / darkest copper */
+  --c-accent-ink:        #006C99;   /* LINKS AND LABELS ON WHITE ONLY — 5.8:1 AA */
+
+  /* --- 2. TEXT ROLES ---------------------------------------------
+     What each kind of text is coloured. Components use these roles, not
+     raw palette values, so headings, body, labels and links stay in step
+     across the whole site. Dark surfaces (hero, graphite sections, bands,
+     footer, drawer) switch the roles automatically; see .on-navy etc. in
+     base.css. */
+  --c-heading:      var(--c-ink);          /* h1–h4, display, card titles */
+  --c-text:         var(--c-ink-mute);     /* running body copy */
+  --c-text-strong:  var(--c-ink);          /* bold run-ins, emphasis */
+  --c-text-faint:   var(--c-ink-faint);    /* captions, source lines */
+  --c-label:        var(--c-ink-faint);    /* letterspaced caps labels */
+  --c-link:         var(--c-accent-ink);   /* text links */
+  --c-number:       var(--c-accent-ink);   /* section and step numerals */
+
+  --c-heading-on-dark:     var(--c-white);
+  --c-text-on-dark:        var(--c-on-navy-mute);
+  --c-text-strong-on-dark: var(--c-white);
+  --c-text-faint-on-dark:  var(--c-on-navy-mute);
+  --c-label-on-dark:       var(--c-accent);
+  --c-link-on-dark:        var(--c-accent-bright);
+  --c-number-on-dark:      var(--c-accent-bright);
 
   /* Ghosted logo watermark on navy — signature brand move */
-  --c-watermark:       rgba(46, 216, 255, 0.045);
+  --c-watermark:       color-mix(in srgb, var(--c-accent-bright) 4.5%, transparent);
 
   /* Photography treatment. Context imagery is never shown raw:
      it is pulled into the brand by a navy multiply veil. */
-  --veil-navy:         rgba(13, 27, 42, 0.72);
-  --veil-navy-strong:  rgba(13, 27, 42, 0.86);
+  --veil-graphite:         color-mix(in srgb, var(--c-graphite) 72%, transparent);
+  --veil-graphite-strong:  color-mix(in srgb, var(--c-graphite) 86%, transparent);
 
   /* Focus — visible, branded, never removed */
-  --c-focus:           var(--c-cyan-bright);
+  --c-focus:           var(--c-accent-bright);
   --focus-ring:        2px solid var(--c-focus);
   --focus-offset:      3px;
 
@@ -62,7 +102,7 @@
      Self-hosted, Latin subset, only the weights below are loaded.
      Do not add a weight without adding the font file. */
 
-  --f-display: "Space Grotesk", "Space Grotesk Fallback", "Segoe UI", system-ui, sans-serif;
+  --f-display: "Space Grotesk", "Space Grotesk Fallback", "Segoe UI", system-ui, sans-serif;   /* headings, as on the live site */
   --f-body:    "Inter", "Inter Fallback", "Segoe UI", system-ui, -apple-system, sans-serif;
 
   --fw-regular:  400;
@@ -76,15 +116,22 @@
      site is dense and long, so the scale is deliberately shallow at
      body sizes and only opens up at display sizes. */
 
-  --fs-display: clamp(2.75rem,  1.35rem + 6.20vw, 6.50rem);  /* hero only */
-  --fs-h1:      clamp(2.25rem,  1.38rem + 3.85vw, 4.25rem);
-  --fs-h2:      clamp(1.75rem,  1.27rem + 2.15vw, 2.875rem);
-  --fs-h3:      clamp(1.25rem,  1.06rem + 0.85vw, 1.75rem);
-  --fs-h4:      clamp(1.0625rem,0.99rem + 0.33vw, 1.25rem);
-  --fs-lead:    clamp(1.125rem, 1.02rem + 0.47vw, 1.4375rem); /* standfirst */
-  --fs-body:    clamp(1rem,     0.97rem + 0.14vw, 1.0625rem);
-  --fs-sm:      0.9375rem;
-  --fs-xs:      0.8125rem;
+  --fs-display: clamp(2.4rem,   1.45rem + 4.10vw, 4.75rem);  /* hero only */
+  --fs-h1:      clamp(2rem,     1.35rem + 2.70vw, 3.25rem);
+  --fs-h2:      clamp(1.6rem,   1.25rem + 1.50vw, 2.375rem);
+  --fs-h3:      clamp(1.15rem,  1.04rem + 0.50vw, 1.5rem);
+  --fs-h4:      clamp(1rem,     0.96rem + 0.20vw, 1.125rem);
+  --fs-lead:    clamp(1.0625rem, 1rem + 0.28vw, 1.25rem); /* standfirst */
+  --fs-body:    clamp(0.9375rem, 0.92rem + 0.08vw, 1rem);
+  --fs-sm:      0.875rem;
+  --fs-xs:      0.78rem;
+  --fs-card:    clamp(1.125rem, 1.04rem + 0.35vw, 1.375rem);   /* card, tile and person titles */
+  --fs-title:   clamp(1.85rem, 1.4rem + 1.4vw, 2.625rem);       /* panel and section-intro titles */
+  --fs-title-lg:clamp(2.05rem, 1.5rem + 1.8vw, 2.875rem);
+  --fs-statement:clamp(1.3rem, 1.08rem + 0.95vw, 1.95rem);     /* pull statements */
+  --fs-stat:    clamp(2.1rem, 1.6rem + 2.1vw, 3.125rem);        /* big numerals */
+  --fs-stat-sm: clamp(1.3rem, 1.08rem + 0.95vw, 1.85rem);     /* numerals that are words or ranges */
+  --fs-micro:   0.625rem;   /* chart axis labels on phones only */
   --fs-label:   0.75rem;    /* letterspaced caps — section refs */
   --fs-gate:    clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem); /* hold-point numerals */
 
@@ -92,7 +139,7 @@
   --lh-tight:   1.08;
   --lh-heading: 1.18;
   --lh-lead:    1.46;
-  --lh-body:    1.68;   /* generous — this copy is long */
+  --lh-body:    1.65;   /* generous — this copy is long */
   --lh-label:   1.4;
 
   /* Letterspacing. Large type tightens, caps open up.
@@ -126,8 +173,8 @@
   --s-7:   2.5rem;    --s-8:   3rem;      --s-9:  4rem;
   --s-10:  5rem;      --s-11:  6rem;      --s-12: 8rem;
 
-  --s-section:       clamp(4.5rem, 2.9rem + 7.1vw, 9rem);
-  --s-section-tight: clamp(3.25rem, 2.3rem + 4.2vw, 5.5rem);
+  --s-section:       clamp(3rem, 2rem + 3.6vw, 5.5rem);
+  --s-section-tight: clamp(2.25rem, 1.8rem + 2.2vw, 3.75rem);
 
 
   /* --- 5. LAYOUT ------------------------------------------------
@@ -135,8 +182,8 @@
      cramped on a phone or adrift on a 27" display. */
 
   --page-max:    1440px;
-  --content-max: 1180px;
-  --gutter:      clamp(1.25rem, 0.72rem + 2.35vw, 4.5rem);
+  --content-max: 1240px;
+  --gutter:      clamp(1.25rem, -1rem + 6vw, 5.5rem);   /* wide enough on desktop to clear the spine */
   --grid-gap:    clamp(1.25rem, 0.9rem + 1.6vw, 2.5rem);
   --cols:        12;
 
@@ -173,8 +220,8 @@
      Almost none. Authority here comes from rules and space, not
      shadow. Glassmorphism and soft drop shadows are prohibited. */
 
-  --shadow-card: 0 1px 2px rgba(13, 27, 42, 0.05),
-                 0 8px 28px rgba(13, 27, 42, 0.06);
+  --shadow-card: 0 1px 2px color-mix(in srgb, var(--c-graphite) 5%, transparent),
+                 0 8px 28px color-mix(in srgb, var(--c-graphite) 6%, transparent);
   --radius:      0;      /* sharp geometry — engineered, not soft */
   --radius-pill: 999px;  /* pills and the circular card icons only */
 
@@ -197,10 +244,10 @@
 
 @media (prefers-contrast: more) {
   :root {
-    --c-ink-mute:      #3C4E5E;
-    --c-ink-faint:     #55697C;
-    --c-on-navy-mute:  #BCCCD9;
-    --c-rule:          #B8C4CE;
-    --c-navy-line:     #3E566E;
+    --c-ink-mute:      #3F4650;
+    --c-ink-faint:     #5A626E;
+    --c-on-navy-mute:  #C4CAD3;
+    --c-rule:          #B7BDC6;
+    --c-graphite-line:     #555B67;
   }
 }

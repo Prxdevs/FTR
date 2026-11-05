@@ -1,0 +1,56 @@
+/* ============================================================
+   FTR — markets.css
+   Sectors overview page only (markets/index.html). Depends on
+   tokens.css and base.css, which carry the hero, facts, sectors
+   triptych and closing CTA.
+   ============================================================ */
+
+/* The homepage's sectors intro column reused here without the
+   circular "All sectors" link — this page IS that link's destination,
+   so pointing it at itself would be a dead loop. */
+.sectors__text--page { max-width: min(40ch, 100%); }
+
+
+/* ============================================================
+   TWO MORE, IN PREPARATION
+   Honest about what is not built yet rather than silent about it:
+   named, dated by nothing, and pointed at a director in the
+   meantime — the same voice as every holding page on the site.
+   ============================================================ */
+
+.soon-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  margin-top: var(--s-9);
+}
+@media (max-width: 700px) { .soon-grid { grid-template-columns: 1fr; } }
+
+.soon-card {
+  min-width: 0;
+  padding-top: var(--s-6);
+  border-top: var(--hairline) dashed var(--c-rule);
+}
+
+.soon-card__tag {
+  display: inline-block;
+  margin-bottom: var(--s-4);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--c-ink-faint);
+}
+.soon-card__tag::before {
+  content: "";
+  display: inline-block;
+  width: 0.4rem; height: 0.4rem;
+  margin-right: var(--s-3);
+  border-radius: var(--radius-pill);
+  background: var(--c-cyan-ink);
+}
+
+.soon-card__title { margin-bottom: var(--s-3); }
+.soon-card__text { color: var(--c-ink-mute); text-wrap: pretty; max-width: var(--measure-tight); }
+
+.soon-note { margin-top: var(--s-8); }

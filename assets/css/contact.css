@@ -6,11 +6,11 @@
 /* --- Page header ---------------------------------------------- */
 
 .chero {
-  background: var(--c-navy);
+  background: var(--c-graphite);
   color: var(--c-on-navy);
   padding-block: calc(var(--s-12) + 2rem) var(--s-10);
 }
-.chero__label { color: var(--c-cyan); margin-bottom: var(--s-6); }
+.chero__label { color: var(--c-accent); margin-bottom: var(--s-6); }
 .chero__title { color: var(--c-white); margin-bottom: var(--s-6); }
 .chero__lede {
   font-size: var(--fs-lead);
@@ -72,7 +72,7 @@
 .field__input:hover { border-bottom-color: var(--c-ink-faint); }
 .field__input:focus-visible {
   outline: none;
-  border-bottom-color: var(--c-cyan-ink);
+  border-bottom-color: var(--c-accent-ink);
   border-bottom-width: var(--rule-accent);
 }
 .field__input::placeholder { color: var(--c-ink-faint); }
@@ -98,7 +98,7 @@ select.field__input {
 }
 
 /* Invalid only after the browser has something to judge. */
-.field__input:user-invalid { border-bottom-color: #B3261E; }
+.field__input:user-invalid { border-bottom-color: var(--c-error); }
 
 .form__actions {
   display: flex;
@@ -134,8 +134,8 @@ select.field__input {
   display: none;
 }
 .form__status.is-shown { display: block; }
-.form__status.is-ok    { border-left-color: var(--c-cyan-ink); }
-.form__status.is-error { border-left-color: #B3261E; }
+.form__status.is-ok    { border-left-color: var(--c-accent-ink); }
+.form__status.is-error { border-left-color: var(--c-error); }
 
 /* --- Aside ----------------------------------------------------- */
 
@@ -154,7 +154,7 @@ select.field__input {
   font-size: var(--fs-xs);
   letter-spacing: var(--ls-caps);
   text-transform: uppercase;
-  color: var(--c-cyan-ink);
+  color: var(--c-accent-ink);
   margin-bottom: var(--s-3);
 }
 .person-card__meta {
@@ -166,7 +166,7 @@ select.field__input {
 .person-card__tel {
   display: inline-block;
   font-weight: var(--fw-medium);
-  color: var(--c-cyan-ink);
+  color: var(--c-accent-ink);
   text-decoration: none;
   border-bottom: var(--hairline) solid currentColor;
 }
@@ -198,7 +198,7 @@ select.field__input {
 .step {
   min-width: 0;
   padding: var(--s-6) var(--s-6) 0 0;
-  border-top: var(--hairline) solid var(--c-navy-line);
+  border-top: var(--hairline) solid var(--c-graphite-line);
 }
 .step + .step { padding-left: var(--s-6); }
 
@@ -207,7 +207,7 @@ select.field__input {
   font-family: var(--f-display);
   font-size: var(--fs-gate);
   letter-spacing: var(--ls-caps);
-  color: var(--c-cyan);
+  color: var(--c-accent);
   margin-bottom: var(--s-5);
 }
 .step__title { color: var(--c-white); margin-bottom: var(--s-3); }

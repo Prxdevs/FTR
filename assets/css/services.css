@@ -1,0 +1,199 @@
+/* ============================================================
+   FTR — services.css
+   Services page only. Depends on tokens.css and base.css, which
+   carry the hero, split layout and closing CTA.
+
+   Four services, one identical structure: consistency across the
+   four is what makes the page read as engineered.
+   ============================================================ */
+
+
+/* ============================================================
+   IN-PAGE INDEX
+   Sticks under the fixed header so the four services stay one
+   click apart. Below 860px it collapses to the numerals alone:
+   four labels cannot share a phone-width row, and a scroller
+   would hide two of them.
+   ============================================================ */
+
+.snav {
+  position: sticky;
+  top: clamp(4.25rem, 3.6rem + 2.6vw, 5.5rem);   /* the header's own height */
+  z-index: 40;                                    /* under the header (100) and the drawer (200) */
+  background: var(--c-navy-deep);
+  border-bottom: var(--hairline) solid var(--c-navy-line);
+}
+
+.snav__list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.snav__item { position: relative; min-width: 0; }
+.snav__item + .snav__item::before {
+  content: "";
+  position: absolute;
+  left: 0; top: var(--s-4); bottom: var(--s-4);
+  width: var(--hairline);
+  background: var(--c-navy-line);
+}
+
+.snav__link {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  min-width: 0;
+  padding: var(--s-4) var(--s-4) var(--s-4) 0;
+  text-decoration: none;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  line-height: 1.35;
+  color: var(--c-on-navy-mute);
+  transition: color var(--d-fast) var(--ease);
+}
+.snav__item + .snav__item .snav__link { padding-left: var(--s-4); }
+
+.snav__num {
+  flex: none;
+  font-family: var(--f-display);
+  font-size: var(--fs-gate);
+  letter-spacing: var(--ls-caps);
+  color: var(--c-cyan);
+}
+
+/* The current service: lit text and a cyan rule on the bar's lower edge. */
+.snav__link::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -1px;
+  height: var(--hairline);
+  background: var(--c-cyan);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--d-base) var(--ease);
+}
+.snav__link:hover,
+.snav__link[aria-current] { color: var(--c-white); }
+.snav__link[aria-current]::after { transform: scaleX(1); }
+
+@media (max-width: 860px) {
+  .snav__item + .snav__item::before { display: none; }
+  .snav__link,
+  .snav__item + .snav__item .snav__link { justify-content: center; padding: var(--s-4) 0; }
+  .snav__name {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+
+/* ============================================================
+   THE FOUR SERVICES
+   Heading and positioning line on the left; prose with bold
+   run-in headings on the right; then what is issued on request.
+   ============================================================ */
+
+/* Anchors land the gate head just clear of the header and the index,
+   whatever the section's own top padding happens to be. The page already
+   reserves 6rem for the header (scroll-padding-top on html), so this adds
+   only what the index bar needs: 6rem + 3.5rem = 9.5rem in all. */
+.svc { scroll-margin-top: calc(3.5rem - var(--s-section)); }
+
+.svc__body .prose { max-width: var(--measure-tight); }
+.svc__body .prose p { color: var(--c-ink-mute); }
+.svc__body .prose strong { color: var(--c-ink); font-weight: var(--fw-semibold); }
+
+.svc__meta {
+  margin-top: var(--s-7);
+  padding-top: var(--s-5);
+  border-top: var(--hairline) solid var(--c-rule);
+  max-width: var(--measure-tight);
+}
+.svc__meta .label { margin-bottom: var(--s-2); }
+.svc__meta p { font-size: var(--fs-sm); color: var(--c-ink-mute); text-wrap: pretty; }
+
+.svc__links {
+  margin-top: var(--s-6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-6);
+}
+
+
+/* ============================================================
+   CHOOSER — "Where is your project today?"
+   Five situations, one best-fit service each. Without JS every
+   answer is listed, so nothing is hidden behind a script.
+   ============================================================ */
+
+.chooser { max-width: 56rem; }
+.chooser__title { margin-bottom: var(--s-6); }
+.chooser__opts { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+.chooser__opt {
+  padding: var(--s-4) var(--s-5);
+  background: transparent;
+  border: var(--hairline) solid var(--c-rule);
+  font: inherit; font-size: var(--fs-sm); font-weight: var(--fw-medium);
+  color: var(--c-ink); text-align: left; cursor: pointer;
+  transition: border-color var(--d-fast) var(--ease), background var(--d-fast) var(--ease), color var(--d-fast) var(--ease);
+}
+.chooser__opt:hover { border-color: var(--c-cyan); }
+.chooser__opt[aria-pressed="true"] { background: var(--c-navy); border-color: var(--c-navy); color: var(--c-white); }
+.chooser__hint { margin-top: var(--s-4); font-size: var(--fs-sm); color: var(--c-ink-faint); }
+
+.chooser__result {
+  margin-top: var(--s-6);
+  padding: var(--s-6) 0 0 var(--s-6);
+  border-left: var(--rule-accent) solid var(--c-cyan);
+  max-width: 44rem;
+}
+.chooser__result .label { margin-bottom: var(--s-3); }
+.chooser__name { margin-bottom: var(--s-3); }
+.chooser__result p { color: var(--c-ink-mute); margin-bottom: var(--s-4); text-wrap: pretty; }
+
+.chooser--js .chooser__hint { display: block; }
+.chooser--js .chooser__result[hidden] { display: none; }
+.chooser:not(.chooser--js) .chooser__opts,
+.chooser:not(.chooser--js) .chooser__hint { display: none; }
+.chooser--js .chooser__result { animation: chooser-in var(--d-base) var(--ease) both; }
+@keyframes chooser-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* The chooser sits above the facts row. */
+.chooser + .facts { margin-top: var(--s-10); }
+
+
+/* ============================================================
+   SERVICE BRIEF — plain line first, then who it suits
+   ============================================================ */
+
+.svc__short {
+  margin-bottom: var(--s-6);
+  padding-bottom: var(--s-6);
+  border-bottom: var(--hairline) solid var(--c-rule);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  font-weight: var(--fw-medium);
+  color: var(--c-ink);
+  text-wrap: pretty;
+}
+.svc__short .label { margin-bottom: var(--s-2); }
+
+.svc__fit {
+  margin-top: var(--s-7);
+  padding: var(--s-5) var(--s-6);
+  background: rgba(184, 115, 51, 0.07);
+  border-left: var(--rule-accent) solid var(--c-cyan);
+  max-width: var(--measure-tight);
+}
+.svc__fit .label { margin-bottom: var(--s-2); }
+.svc__fit p { font-size: var(--fs-sm); color: var(--c-ink-mute); }
+.svc__fit strong { color: var(--c-ink); }
