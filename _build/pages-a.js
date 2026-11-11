@@ -102,11 +102,11 @@ const MARKET_STATS = [
 function home() {
   page({
     slug: '',
-    title: 'FTR &mdash; Mission-Critical Construction, Skills &amp; India Entry',
-    desc: 'FTR builds, commissions and staffs mission-critical facilities in India: semiconductor fabs, data centres and cleanrooms, to Irish and European standards.',
+    title: 'FTR (First Time Right) &mdash; Mission-Critical Construction',
+    desc: 'FTR (First Time Right) builds, commissions and staffs mission-critical facilities in India: semiconductor fabs, data centres and cleanrooms.',
     css: ['home'],
     stuck: false,
-    schema: [{ '@type': 'WebSite', '@id': 'https://ftright.com/#website', url: 'https://ftright.com/', name: 'FTR', publisher: { '@id': 'https://ftright.com/#organization' } }],
+    schema: [{ '@type': 'WebSite', '@id': 'https://ftright.com/#website', url: 'https://ftright.com/', name: 'FTR', alternateName: ['First Time Right', 'FTR First Time Right', 'ftright'], publisher: { '@id': 'https://ftright.com/#organization' } }],
     body: (P) => `
   <section class="hero hero--rotor" aria-labelledby="h1">
     <div class="hero__media">
@@ -167,9 +167,9 @@ function about() {
     title: 'About FTR &mdash; Mission-Critical Construction in India',
     desc: 'FTR is an India-based mission-critical M&amp;E construction, consultancy and skills company, led by people with 30+ years of European delivery experience.',
     schema: [crumbSchema([['Home', ''], ['About', 'about/']]),
-      { '@type': 'Person', name: 'Vishnubhai (ND) Chaudhari', jobTitle: 'Executive Director, Corporate Affairs', worksFor: { '@id': 'https://ftright.com/#organization' } },
-      { '@type': 'Person', name: 'Paul Colleary', jobTitle: 'Executive Director, Operations', worksFor: { '@id': 'https://ftright.com/#organization' } },
-      { '@type': 'Person', name: 'Trushti Raval', jobTitle: 'CEO & Managing Director', worksFor: { '@id': 'https://ftright.com/#organization' } }],
+      { '@type': 'Person', name: 'Vishnubhai (ND) Chaudhari', jobTitle: 'Director', worksFor: { '@id': 'https://ftright.com/#organization' } },
+      { '@type': 'Person', name: 'Paul Colleary', jobTitle: 'Director & Promoter', worksFor: { '@id': 'https://ftright.com/#organization' } },
+      { '@type': 'Person', name: 'Trushti Raval', jobTitle: 'Director', worksFor: { '@id': 'https://ftright.com/#organization' } }],
     body: (P) => `
 ${hero({ P, label: 'About FTR', title: 'Irish and European mission-critical know-how, skilled and built into India&rsquo;s next generation of facilities.', lede: 'FTR (First Time Right) is an India-based mission-critical M&amp;E construction, consultancy and skills company.', photo: 'fire-main' })}
 
