@@ -98,13 +98,13 @@ ${items.map(([label, value, note, src]) => `        <div class="fact reveal">
 // Titles per the client (9 Nov 2026), TEMPORARY until Paul Colleary's visa is granted. Keep the
 // schema.org jobTitle values in pages-a.js (about) in step with these.
 const PEOPLE = {
-  vishnubhai: { slug: 'vishnubhai-chaudhari', name: 'Vishnubhai (ND) Chaudhari', initials: 'VC', role: 'Director' },
+  vishnubhai: { slug: 'vishnubhai-chaudhari', name: 'Vishnubhai Chaudhari', initials: 'VC', role: 'Director' },
   paul: { slug: 'paul-colleary', name: 'Paul Colleary', initials: 'PC', role: 'Director &amp; Promoter' },
   trushti: { slug: 'trushti-raval', name: 'Trushti Raval', initials: 'TR', role: 'Director' },
 };
 const BIO = {
   vishnubhai: [
-    'ND (Vishnubhai) Chaudhari is a Director at FTR. He brings more than 35 years of experience across Indian industry, real estate development and enterprise leadership. He has developed and built his own commercial centres, giving him first-hand command of project planning, approvals and construction delivery in the Indian market.',
+    'Vishnubhai Chaudhari is a Director at FTR. He brings more than 35 years of experience across Indian industry, real estate development and enterprise leadership. He has developed and built his own commercial centres, giving him first-hand command of project planning, approvals and construction delivery in the Indian market.',
     'Over three decades, he has built long-standing, trusted relationships with senior leaders across the public sector and Indian industry. These relationships let FTR align its programmes with national and state priorities, and engage partners with credibility from the outset.',
     'At FTR, he guides market strategy, institutional engagement and the company&rsquo;s long-term vision as India expands its semiconductor, data centre and critical infrastructure base.',
   ],
