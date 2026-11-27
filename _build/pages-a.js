@@ -167,7 +167,6 @@ function about() {
     title: 'About FTR &mdash; Mission-Critical Construction in India',
     desc: 'FTR is an India-based mission-critical M&amp;E construction, consultancy and skills company, led by people with 30+ years of European delivery experience.',
     schema: [crumbSchema([['Home', ''], ['About', 'about/']]),
-      { '@type': 'Person', name: 'Vishnubhai Chaudhari', jobTitle: 'Director', worksFor: { '@id': 'https://ftright.com/#organization' } },
       { '@type': 'Person', name: 'Paul Colleary', jobTitle: 'Director & Promoter', worksFor: { '@id': 'https://ftright.com/#organization' } },
       { '@type': 'Person', name: 'Trushti Raval', jobTitle: 'Director', worksFor: { '@id': 'https://ftright.com/#organization' } }],
     body: (P) => `
@@ -270,7 +269,6 @@ ${kv([
     ['AI Infrastructure layer', 'Across programmes, plus DCE-AI (AI Infrastructure Engineering) at Tier 3.'],
     ['Taught by', 'Resident Irish and European master trainers with live semiconductor project heritage (Ireland&rsquo;s Intel Leixlip / Fab 34 track record).'],
     ['Who can enrol', 'ITI pass-outs, diploma holders, B.E./B.Tech graduates, experienced site workers.'],
-    ['Lead contact', 'Vishnubhai Chaudhari.'],
     ['Sectors served', 'Semiconductor fabs, ATMP/OSAT, hyperscale and AI data centres, pharma and biotech, medical devices and hospitals, EV and battery gigafactories, renewables and green hydrogen, transmission and substations, defence and aerospace, electronics and display.'],
   ])}` })}
 

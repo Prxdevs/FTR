@@ -94,20 +94,14 @@ ${items.map(([label, value, note, src]) => `        <div class="fact reveal">
         </div>`).join('\n')}
       </dl>`;
 
-// Leadership, in the client's order (26 Oct 2026): ND Chaudhari, Paul Colleary, Trushti Raval.
+// Leadership, in the client's order: Paul Colleary, Trushti Raval.
 // Titles per the client (9 Nov 2026), TEMPORARY until Paul Colleary's visa is granted. Keep the
 // schema.org jobTitle values in pages-a.js (about) in step with these.
 const PEOPLE = {
-  vishnubhai: { slug: 'vishnubhai-chaudhari', name: 'Vishnubhai Chaudhari', initials: 'VC', role: 'Director' },
   paul: { slug: 'paul-colleary', name: 'Paul Colleary', initials: 'PC', role: 'Director &amp; Promoter' },
   trushti: { slug: 'trushti-raval', name: 'Trushti Raval', initials: 'TR', role: 'Director' },
 };
 const BIO = {
-  vishnubhai: [
-    'Vishnubhai Chaudhari is a Director at FTR. He brings more than 35 years of experience across Indian industry, real estate development and enterprise leadership. He has developed and built his own commercial centres, giving him first-hand command of project planning, approvals and construction delivery in the Indian market.',
-    'Over three decades, he has built long-standing, trusted relationships with senior leaders across the public sector and Indian industry. These relationships let FTR align its programmes with national and state priorities, and engage partners with credibility from the outset.',
-    'At FTR, he guides market strategy, institutional engagement and the company&rsquo;s long-term vision as India expands its semiconductor, data centre and critical infrastructure base.',
-  ],
   paul: ['30+ years in mission-critical M&amp;E delivery across Ireland, Germany and wider Europe, rising from the trades to Manager of the Planning department. Experience with Suir Engineering, Jones Engineering and AM Technical Solutions. Has spent the last couple of years on a semiconductor project in India, so knows the industry from both European and Indian sides. Keen eye for quality; special interest in cleanroom fundamentals for semiconductor fabs.'],
   trushti: [
     'Electrical Engineering (India); Business Management, Finance (England).',
@@ -116,7 +110,7 @@ const BIO = {
 };
 
 // Every card opens its profile; `withBio` is kept for call compatibility.
-const ORDER = ['vishnubhai', 'paul', 'trushti'];
+const ORDER = ['paul', 'trushti'];
 const team = (P, withBio) => `      <ul class="team${withBio ? ' team--about' : ''}">
 ${ORDER.map((k) => member(P, { ...PEOPLE[k], bio: BIO[k] })).join('\n')}
       </ul>`;
